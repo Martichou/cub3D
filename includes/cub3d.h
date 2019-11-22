@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:25:35 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/21 20:53:54 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/22 21:04:49 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,5 @@ int		key_release(int keycode, t_cub3d *t);
 
 void	ray(t_cub3d *t);
 void	draw_wall(int x, int start, int end, t_cub3d *t);
-void	draw_sky(t_cub3d *t);
-void	draw_floor(t_cub3d *t);
 
 #endif

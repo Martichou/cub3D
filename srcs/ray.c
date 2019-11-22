@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:47:52 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/21 21:17:54 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/22 21:04:28 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ static void	ray_casting_init(t_cub3d *t, int x)
 
 static void	floor_and_ceiling(t_cub3d *t, int x)
 {
-if (t->texture == 0){
 	if (t->start > 0)
 	{
 		t->color = 0xA7A3C7;
@@ -95,7 +94,6 @@ if (t->texture == 0){
 						&t->color, sizeof(int));
 			}
 	}
-}
 	if (t->end > 0)
 	{
 		t->color = 0xc91eb5;
@@ -112,8 +110,6 @@ void	ray(t_cub3d *t)
 	t->x = -1;
 	t->img = mlx_new_image(t->mlx, WINX, WINY);
 	t->img_ptr = mlx_get_data_addr(t->img, &t->bpp, &t->sl, &t->endian);
-	if (t->texture == 1)
-		draw_sky(t);
 	while (++t->x < WINX)
 	{
 		ray_casting_init(t, t->x);
