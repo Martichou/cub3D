@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:47:52 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/22 21:04:28 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/22 21:33:10 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,8 @@ static void	floor_and_ceiling(t_cub3d *t, int x)
 		t->y = -1;
 		if (x < WINX && t->y < WINY)
 			while (++t->y < t->start)
-			{
 				ft_memcpy(t->img_ptr + 4 * WINX * t->y + x * 4,
 						&t->color, sizeof(int));
-			}
 	}
 	if (t->end > 0)
 	{
