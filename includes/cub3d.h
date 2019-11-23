@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:25:35 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/23 12:01:59 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/25 11:45:46 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,8 @@ int		key_release(int keycode, t_cub3d *t);
 
 void	ray(t_cub3d *t);
 void	draw_wall(int x, int start, int end, t_cub3d *t);
+void	draw_sky(t_cub3d *t);
+
+int		add_ao(int color, double percent);
 
 #endif

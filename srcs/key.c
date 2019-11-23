@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:44:41 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/21 20:46:05 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/25 12:15:58 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,7 @@ int		key_press(int keycode, t_cub3d *t)
 	else if (keycode == 53)
 		exit_program(t);
 	else if (keycode == 17)
-	{
-		if (t->texture == 0)
-			t->texture = 1;
-		else
-			t->texture = 0;
-	}
+		t->texture = (t->texture == 1) ? 0 : 1;
 	return (0);
 }
 
