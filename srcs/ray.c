@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:47:52 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/22 21:33:10 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/23 12:03:28 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static void	floor_and_ceiling(t_cub3d *t, int x)
 {
 	if (t->start > 0)
 	{
-		t->color = 0xA7A3C7;
+		t->color = 0xc9c3c3;
 		t->y = -1;
 		if (x < WINX && t->y < WINY)
 			while (++t->y < t->start)
@@ -94,7 +94,7 @@ static void	floor_and_ceiling(t_cub3d *t, int x)
 	}
 	if (t->end > 0)
 	{
-		t->color = 0xc91eb5;
+		t->color = 0xad8f6c;
 		t->y = t->end - 1;
 		if (x < WINX && t->y < WINY)
 			while (++t->y < WINY)
@@ -119,9 +119,9 @@ void	ray(t_cub3d *t)
 		if (t->end >= WINY)
 			t->end = WINY - 1;
 		if (t->side == 1)
-			t->color = 0x447C2B;
+			t->color = WALL_N;
 		else
-			t->color = 0xA8122C;
+			t->color = WALL_E;
 		draw_wall(t->x, t->start - 1, t->end, t);
 		floor_and_ceiling(t, t->x);
 	}

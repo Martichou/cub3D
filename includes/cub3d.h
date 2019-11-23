@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:25:35 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/22 21:04:49 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/23 12:01:59 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@
 # define WINX 1024
 # define WINY 768
 # define TITLE "cub3D"
+
+# define WALL_N 0x3d3d3d
+# define WALL_E 0x0B2D4B
+# define WALL_S 0x32a852
+# define WALL_W 0x38dbe0
 
 typedef struct	s_tex
 {
