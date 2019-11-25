@@ -6,9 +6,11 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:25:35 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/25 11:45:46 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/25 22:30:16 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdio.h>
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -21,14 +23,24 @@
 # include <mlx.h>
 
 # define ep error_printf()
-# define WINX 1024
-# define WINY 768
 # define TITLE "cub3D"
 
 # define WALL_N 0x3d3d3d
 # define WALL_E 0x0B2D4B
 # define WALL_S 0x32a852
 # define WALL_W 0x38dbe0
+
+typedef union
+{
+	unsigned int	hexcode;
+	struct
+	{
+		unsigned char	empty;
+		unsigned char	r;
+		unsigned char	g;
+		unsigned char	b;
+	}				rgb;
+}				t_color;
 
 typedef struct	s_tex
 {
@@ -41,12 +53,16 @@ typedef struct	s_tex
 
 typedef struct	s_cub3d
 {
-	t_tex		tex[9];
+	t_tex		tex[5];
 	void		*mlx;
 	void		*win;
 	void		*img;
 	void		*img_ptr;
 	int			**map;
+	int			window_width;
+	int			window_height;
+	t_color		floor_color;
+	t_color		ceilling_color;
 	int			nb_lines;
 	int			lenline;
 	int			bpp;
@@ -66,12 +82,12 @@ typedef struct	s_cub3d
 	int			move_down;
 	int			move_left;
 	int			move_right;
+	int			look_right;
+	int			look_left;
 	int			x_text;
 	int			y_text;
 	int			id;
 	int			texture;
-	int			x_floortext;
-	int			y_floortext;
 	int			x;
 	int			y;
 	double		x_pos;
@@ -97,28 +113,51 @@ typedef struct	s_cub3d
 	double		x_wall;
 	double		x_floor;
 	double		y_floor;
-	double		x_curfloortext;
-	double		y_curfloortext;
 	double		curdist;
-	double		weight;
 }				t_cub3d;
 
+typedef int		(*t_option_parser_func)(t_cub3d *t, char *line);
+
+typedef struct	s_option_parser
+{
+	char					*id;
+	t_option_parser_func	func;
+	int						to_skip;
+}				t_option_parser;
+
 /*
-** util's functions
+** Util's functions
 */
 int		error_printf();
 int		exit_program(t_cub3d *t);
 
-int		parsing(t_cub3d *t, char *filename);
-
+/*
+** Deplacement functions
+*/
 int		move(t_cub3d *t);
 int		key_press(int keycode, t_cub3d *t);
 int		key_release(int keycode, t_cub3d *t);
 
+/*
+** Drawing functions
+*/
 void	ray(t_cub3d *t);
 void	draw_wall(int x, int start, int end, t_cub3d *t);
 void	draw_sky(t_cub3d *t);
 
-int		add_ao(int color, double percent);
+/*
+** Parsing functions
+*/
+int     parse(t_cub3d *t, char *filename);
+int		parse_resolution(t_cub3d *t, char *line);
+int		parse_map(t_cub3d *t, char *line);
+int		parse_east_texture(t_cub3d *t, char *line);
+int		parse_west_texture(t_cub3d *t, char *line);
+int		parse_south_texture(t_cub3d *t, char *line);
+int		parse_north_texture(t_cub3d *t, char *line);
+int		parse_floor_color(t_cub3d *t, char *line);
+int		parse_ceilling_color(t_cub3d *t, char *line);
+int		parse_sprite_texture(t_cub3d *t, char *line);
+int		setup_sky(t_cub3d *t);
 
 #endif
