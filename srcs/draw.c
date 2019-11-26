@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:51:23 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/25 22:16:14 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/26 16:31:29 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static void	put_pxl_to_img(t_cub3d *t, int x, int y, int color)
 {
 	if (t->texture == 1 && x < t->window_width && y < t->window_height)
 	{
-		t->y_text = abs((((y * 256 - t->window_height * 128 + t->lineheight * 128) * 64)
-					/ t->lineheight) / 256);
+		t->y_text = abs((((y * 256 - t->window_height * 128 +
+			t->lineheight * 128) * 64) / t->lineheight) / 256);
 		ft_memcpy(t->img_ptr + 4 * t->window_width * y + x * 4,
 				&t->tex[t->id].data[t->y_text % 64 * t->tex[t->id].sizeline +
 				t->x_text % 64 * t->tex[t->id].bpp / 8], sizeof(int));
@@ -39,7 +39,8 @@ void		draw_wall(int x, int start, int end, t_cub3d *t)
 		t->x_text = abs(t->x_text);
 	}
 	while (++start <= end)
-		put_pxl_to_img(t, x, start, t->color);
+		put_pxl_to_img(t, x, start,
+			ft_add_ao(t->color, ((start - t->min) * 100. / (t->max - t->min))));
 }
 
 void	draw_sky(t_cub3d *t)
@@ -57,4 +58,39 @@ void	draw_sky(t_cub3d *t)
 		}
 		t->x_text++;
 	}
+}
+
+static void		animate_shotgun(t_cub3d *t, int posx, int posy)
+{
+	if (t->fr >= 15)
+		mlx_put_image_to_window(t->mlx, t->win, t->tex[6].img, posx, posy);
+	else if (t->fr >= 12 && t->fr <= 14)
+		mlx_put_image_to_window(t->mlx, t->win, t->tex[7].img, posx, posy);
+	else if (t->fr >= 10 && t->fr <= 11)
+		mlx_put_image_to_window(t->mlx, t->win, t->tex[8].img, posx, posy);
+	else if (t->fr >= 7 && t->fr <= 9)
+		mlx_put_image_to_window(t->mlx, t->win, t->tex[9].img, posx, posy);
+	else if (t->fr >= 5 && t->fr <= 7)
+		mlx_put_image_to_window(t->mlx, t->win, t->tex[10].img, posx, posy);
+	else if (t->fr >= 1 && t->fr <= 4)
+		mlx_put_image_to_window(t->mlx, t->win, t->tex[7].img, posx, posy);
+	t->fr--;
+	if (t->fr == 1)
+	{
+		t->fr = 17;
+		t->shooting = 0;
+	}
+}
+
+void	draw_gun(t_cub3d *t)
+{
+	int posx;
+	int posy;
+
+	posx = (t->window_width - 400) / 2;
+	posy = t->window_height - 400;
+	if (t->shooting == 0)
+		mlx_put_image_to_window(t->mlx, t->win, t->tex[5].img, posx, posy);
+	else
+		animate_shotgun(t, posx, posy);
 }

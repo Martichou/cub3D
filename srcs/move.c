@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:43:04 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/25 22:28:50 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/26 16:37:35 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ int		move(t_cub3d *t)
 		t->y_plane = t->x_oldplane * sin(t->rs) + t->y_plane * cos(t->rs);
 	}
 	ray(t);
+	draw_gun(t);
 	return (0);
 }

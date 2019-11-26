@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 20:36:16 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/25 21:56:20 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/26 15:46:13 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,12 @@ static int parse_line(t_cub3d *t, char *line)
 	return (0);
 }
 
-int     parse(t_cub3d *t, char *filename)
+static int	setup_map(t_cub3d *t, char *filename)
 {
 	int		fd;
 	int		ret;
 	char	*line;
-
-	t->map = NULL;
-	t->ceilling_color.hexcode = 0;
-	t->floor_color.hexcode = 0;
+	
 	if ((fd = open(filename, O_RDONLY)) < 0)
 		return (0);
 	while ((ret = get_next_line(fd, &line)) > 0)
@@ -58,9 +55,25 @@ int     parse(t_cub3d *t, char *filename)
 		free(line);
 	}
 	close(fd);
-	if ((fd = open(filename, O_RDONLY)) < 0)
+	if (ret == -1)
 		return (0);
 	if (!(t->map = (int **)malloc(sizeof(int *) * t->nb_lines)))
+		return (0);
+	return(1);
+}
+
+int     parse(t_cub3d *t, char *filename)
+{
+	int		fd;
+	int		ret;
+	char	*line;
+
+	t->map = NULL;
+	t->ceilling_color.hexcode = 0;
+	t->floor_color.hexcode = 0;
+	if (!setup_map(t, filename))
+		return (0);
+	if ((fd = open(filename, O_RDONLY)) < 0)
 		return (0);
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
@@ -68,9 +81,10 @@ int     parse(t_cub3d *t, char *filename)
 			return (0);
 		free(line);
 	}
+	close(fd);
 	if (ret == -1)
 		return (0);
-	close(fd);
 	setup_sky(t);
+	setup_shotgun(t);
 	return (1);
 }

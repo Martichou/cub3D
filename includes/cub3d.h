@@ -6,9 +6,11 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:25:35 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/25 22:42:51 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/26 16:17:19 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdio.h>
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -26,6 +28,8 @@
 # define WALL_E				0x0B2D4B
 # define WALL_S				0x32a852
 # define WALL_W				0x38dbe0
+# define AO					0x000000
+# define D					(double)
 
 typedef union
 {
@@ -50,7 +54,7 @@ typedef struct				s_tex
 
 typedef struct				s_cub3d
 {
-	t_tex					tex[5];
+	t_tex					tex[10];
 	void					*mlx;
 	void					*win;
 	void					*img;
@@ -87,6 +91,10 @@ typedef struct				s_cub3d
 	int						texture;
 	int						x;
 	int						y;
+	int						min;
+	int						max;
+	int						shooting;
+	int						fr;
 	double					x_pos;
 	double					y_pos;
 	double					x_dir;
@@ -134,6 +142,7 @@ int							exit_program(t_cub3d *t);
 int							move(t_cub3d *t);
 int							key_press(int keycode, t_cub3d *t);
 int							key_release(int keycode, t_cub3d *t);
+int							key_shoot(int keycode, t_cub3d *t);
 
 /*
 ** Drawing functions
@@ -141,6 +150,7 @@ int							key_release(int keycode, t_cub3d *t);
 void						ray(t_cub3d *t);
 void						draw_wall(int x, int start, int end, t_cub3d *t);
 void						draw_sky(t_cub3d *t);
+void						draw_gun(t_cub3d *t);
 
 /*
 ** Parsing functions
@@ -156,5 +166,13 @@ int							parse_floor_color(t_cub3d *t, char *line);
 int							parse_ceilling_color(t_cub3d *t, char *line);
 int							parse_sprite_texture(t_cub3d *t, char *line);
 int							setup_sky(t_cub3d *t);
+int							setup_shotgun(t_cub3d *t);
+
+/*
+** AO
+*/
+int							ft_gt_colors(int clr1, int clr2, double val);
+int							ft_shade_color(int clr, double val);
+int							ft_add_ao(int clr, double percent);
 
 #endif

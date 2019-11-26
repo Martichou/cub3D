@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 20:48:07 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/25 22:16:02 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/26 16:32:21 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,30 @@ int	setup_sky(t_cub3d *t)
 	t->tex[4].img = mlx_xpm_file_to_image(t->mlx, "textures/sky.xpm", &a, &b);
 	t->tex[4].data = mlx_get_data_addr(t->tex[4].img, &t->tex[4].bpp,
 			&t->tex[4].sizeline, &t->tex[4].endian);
+	return (1);
+}
+
+int	setup_shotgun(t_cub3d *t)
+{
+	int		a;
+	int		b;
+
+	a = 64;
+	b = 64;
+	t->tex[5].img = mlx_xpm_file_to_image(t->mlx, "textures/gun.xpm", &a, &b);
+	t->tex[5].data = mlx_get_data_addr(t->tex[5].img, &t->tex[5].bpp,
+			&t->tex[5].sizeline, &t->tex[5].endian);
+	t->tex[6].img = mlx_xpm_file_to_image(t->mlx, "textures/gun2.xpm", &a, &b);
+	t->tex[6].data = mlx_get_data_addr(t->tex[6].img, &t->tex[6].bpp,
+			&t->tex[6].sizeline, &t->tex[6].endian);
+	t->tex[7].img = mlx_xpm_file_to_image(t->mlx, "textures/gun3.xpm", &a, &b);
+	t->tex[7].data = mlx_get_data_addr(t->tex[7].img, &t->tex[7].bpp,
+			&t->tex[7].sizeline, &t->tex[7].endian);
+	t->tex[8].img = mlx_xpm_file_to_image(t->mlx, "textures/gun4.xpm", &a, &b);
+	t->tex[8].data = mlx_get_data_addr(t->tex[8].img, &t->tex[8].bpp,
+			&t->tex[8].sizeline, &t->tex[8].endian);
+	t->tex[9].img = mlx_xpm_file_to_image(t->mlx, "textures/gun5.xpm", &a, &b);
+	t->tex[9].data = mlx_get_data_addr(t->tex[9].img, &t->tex[9].bpp,
+			&t->tex[9].sizeline, &t->tex[9].endian);	
 	return (1);
 }

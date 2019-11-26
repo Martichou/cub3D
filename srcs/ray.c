@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:47:52 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/25 22:11:35 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/26 16:35:11 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static void	dda(t_cub3d *t)
 				t->side = 1;
 				t->color = WALL_S;
 			}
+			t->color = ft_gt_colors(t->color, AO, ((t->x_sidedist / 7) / ((4. - (2. * (float)(1))) - 0.4)));
 		}
 		else
 		{
@@ -62,6 +63,7 @@ static void	dda(t_cub3d *t)
 				t->side = 3;
 				t->color = WALL_E;
 			}
+			t->color = ft_gt_colors(t->color, AO, ((t->y_sidedist / 7) / ((4. - (2. * (float)(1))) - 0.4)));
 		}
 		if (t->map[t->x_map][t->y_map] > 0)
 			t->hit = 1;
@@ -93,22 +95,27 @@ static void	floor_and_ceiling(t_cub3d *t, int x)
 	{
 		if (t->start > 0)
 		{
-			t->color = 0xc9c3c3;
+			t->color = AO;
 			t->y = -1;
 			if (x < t->window_width && t->y < t->window_height)
 				while (++t->y < t->start)
-					ft_memcpy(t->img_ptr + 4 * t->window_width * t->y + x * 4,
-							&t->color, sizeof(int));
+				{
+					//t->color = ft_add_ao(0xc9c3c3, ((t->y - t->min) * 100. / (t->max - t->min)));					
+					ft_memcpy(t->img_ptr + 4 * t->window_width * t->y + x * 4, &t->color, sizeof(int));
+				}
 		}
 	}
 	if (t->end > 0)
 	{
-		t->color = 0xad8f6c;
+
+		t->color = AO;
 		t->y = t->end - 1;
 		if (x < t->window_width && t->y < t->window_height)
 			while (++t->y < t->window_height)
-				ft_memcpy(t->img_ptr + 4 * t->window_width * t->y + x * 4,
-						&t->color, sizeof(int));
+			{
+				//t->color = ft_gt_colors(t->color, AO, ((((t->x_sidedist + t->y_sidedist) / 2) / 5) / ((4. - (2. * (float)(1))) - 0.4)));
+				ft_memcpy(t->img_ptr + 4 * t->window_width * t->y + x * 4, &t->color, sizeof(int));
+			}
 	}
 }
 
@@ -129,6 +136,8 @@ void	ray(t_cub3d *t)
 		t->end = t->lineheight / 2 + t->window_height / 2;
 		if (t->end >= t->window_height)
 			t->end = t->window_height - 1;
+		t->min = ((t->window_height / 2) - t->lineheight);
+		t->max = ((t->window_height / 2) + t->lineheight);
 		draw_wall(t->x, t->start - 1, t->end, t);
 		floor_and_ceiling(t, t->x);
 	}
