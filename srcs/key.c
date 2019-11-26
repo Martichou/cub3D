@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:44:41 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/26 19:23:39 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/26 22:55:12 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int		key_press(int keycode, t_cub3d *t)
 	}
 	else if (keycode == 49)
 		t->shooting = 1;
-	printf("Key is %d\n", keycode);
 	return (0);
 }
 
