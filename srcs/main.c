@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:26:49 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/26 16:18:25 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/26 19:23:09 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ static void		cub3d(t_cub3d *t)
 	t->lenline = -1;
 	t->shooting = 0;
 	t->fr = 17;
+}
+
+static int mouse_hook(t_cub3d *t)
+{
+	(void)t;
+	return (0);
 }
 
 int				main(int ac, char **av)
@@ -40,9 +46,10 @@ int				main(int ac, char **av)
 	mlx_hook(t->win, 17, 0L, exit_program, t);
 	mlx_hook(t->win, 2, (1L << 0), key_press, t);
 	mlx_hook(t->win, 3, (1L << 1), key_release, t);
+	mlx_mouse_hook(t->win, mouse_hook, t);
 	cub3d(t);
 	ray(t);
-	//system("afplay ./sounds/sound.mp3& 2&>/dev/null >/dev/null");
+	system("afplay ./sounds/sound.mp3& 2&>/dev/null >/dev/null");
 	mlx_loop_hook(t->mlx, move, t);
 	mlx_loop(t->mlx);
 	return (0);

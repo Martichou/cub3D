@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:44:41 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/26 16:50:44 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/26 19:23:39 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,18 @@
 
 int		key_press(int keycode, t_cub3d *t)
 {
-	if (keycode == 13 || keycode == 126)
+	if (keycode == 13)
 		t->move_up = 1;
-	else if (keycode == 1 || keycode == 125)
+	else if (keycode == 1)
 		t->move_down = 1;
-	else if (keycode == 2 || keycode == 124)
+	else if (keycode == 2)
 		t->move_right = 1;
-	else if (keycode == 0 || keycode == 123)
+	else if (keycode == 0)
 		t->move_left = 1;
+	else if (keycode == 124)
+		t->look_right = 1;
+	else if (keycode == 123)
+		t->look_left = 1;
 	else if (keycode == 257 || keycode == 258)
 		t->ms = 0.1;
 	else if (keycode == 53)
@@ -34,21 +38,24 @@ int		key_press(int keycode, t_cub3d *t)
 	}
 	else if (keycode == 49)
 		t->shooting = 1;
-	else
-		printf("Key is %d\n", keycode);
+	printf("Key is %d\n", keycode);
 	return (0);
 }
 
 int		key_release(int keycode, t_cub3d *t)
 {
-	if (keycode == 13 || keycode == 126)
+	if (keycode == 13)
 		t->move_up = 0;
-	else if (keycode == 1 || keycode == 125)
+	else if (keycode == 1)
 		t->move_down = 0;
-	else if (keycode == 2 || keycode == 124)
+	else if (keycode == 2)
 		t->move_right = 0;
-	else if (keycode == 0 || keycode == 123)
+	else if (keycode == 0)
 		t->move_left = 0;
+	else if (keycode == 124)
+		t->look_right = 0;
+	else if (keycode == 123)
+		t->look_left = 0;
 	else if (keycode == 257 || keycode == 258)
 		t->ms = 0.05;
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:51:23 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/26 16:31:29 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/26 19:13:43 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,9 @@ void	draw_gun(t_cub3d *t)
 	if (t->shooting == 0)
 		mlx_put_image_to_window(t->mlx, t->win, t->tex[5].img, posx, posy);
 	else
+	{
+		if (t->fr == 17 && (t->fr--))
+			system("afplay ./sounds/shot.mp3& 2&>/dev/null >/dev/null");
 		animate_shotgun(t, posx, posy);
+	}
 }
