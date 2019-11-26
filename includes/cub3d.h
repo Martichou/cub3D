@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:25:35 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/26 16:17:19 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/26 16:42:05 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,6 @@ int							exit_program(t_cub3d *t);
 int							move(t_cub3d *t);
 int							key_press(int keycode, t_cub3d *t);
 int							key_release(int keycode, t_cub3d *t);
-int							key_shoot(int keycode, t_cub3d *t);
 
 /*
 ** Drawing functions
