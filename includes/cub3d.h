@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:25:35 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/26 16:42:05 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/27 01:43:27 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define WALL_W				0x38dbe0
 # define AO					0x000000
 # define D					(double)
+#define texWidth			64
+#define texHeight			64
 
 typedef union
 {
@@ -54,7 +56,7 @@ typedef struct				s_tex
 
 typedef struct				s_cub3d
 {
-	t_tex					tex[10];
+	t_tex					tex[11]; // the tex[10] is for the sprite
 	void					*mlx;
 	void					*win;
 	void					*img;
@@ -95,6 +97,7 @@ typedef struct				s_cub3d
 	int						max;
 	int						shooting;
 	int						fr;
+	double					*zbuffer; // walldist for each vertical lines
 	double					x_pos;
 	double					y_pos;
 	double					x_dir;

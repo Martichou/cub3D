@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:47:52 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/26 16:35:11 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/27 01:52:16 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,57 @@ static void	floor_and_ceiling(t_cub3d *t, int x)
 	}
 }
 
+static void	draw_sprites(t_cub3d *t, int x)
+{
+	int		num_sprites = 1;
+	//int		texture_number = 10;
+	double	x = 27.5;
+	double	y = 3.5;
+
+	//translate sprite position to relative to camera
+	double spriteX = x - t->x_pos;
+	double spriteY = y - t->y_pos;
+	double invDet = 1.0 / (t->x_plane * t->y_dir - t->x_dir * t->y_plane); //required for correct matrix multiplication
+	double transformX = invDet * (t->y_dir * spriteX - t->x_dir * spriteY);
+	double transformY = invDet * (-t->y_plane * spriteX + t->x_plane * spriteY); //this is actually the depth inside the screen, that what Z is in 3D
+	int spriteScreenX = (int)((t->window_width / 2) * (1 + transformX / transformY));
+
+	//parameters for scaling and moving the sprites
+	#define uDiv 1
+	#define vDiv 1
+	#define vMove 0.0
+	int vMoveScreen = (int)(vMove / transformY);
+
+	//calculate height of the sprite on screen
+	int spriteHeight = abs((int)(t->window_height / (transformY))) / vDiv; //using "transformY" instead of the real distance prevents fisheye
+	//calculate lowest and highest pixel to fill in current stripe
+	int drawStartY = -spriteHeight / 2 + t->window_height / 2 + vMoveScreen;
+	if(drawStartY < 0) drawStartY = 0;
+	int drawEndY = spriteHeight / 2 + t->window_height / 2 + vMoveScreen;
+	if(drawEndY >= t->window_height) drawEndY = t->window_height - 1;
+
+	//calculate width of the sprite
+	int spriteWidth = abs( (int) (t->window_height / (transformY))) / uDiv;
+	int drawStartX = -spriteWidth / 2 + spriteScreenX;
+	if(drawStartX < 0) drawStartX = 0;
+	int drawEndX = spriteWidth / 2 + spriteScreenX;
+	if(drawEndX >= t->window_width) drawEndX = t->window_width - 1;
+
+	//loop through every vertical stripe of the sprite on screen
+	for(int stripe = drawStartX; stripe < drawEndX; stripe++)
+	{
+		int texX = (int)(256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * texWidth / spriteWidth) / 256;
+		if(transformY > 0 && stripe > 0 && stripe < t->window_width && transformY < t->zbuffer[stripe])
+		for(int y = drawStartY; y < drawEndY; y++) //for every pixel of the current stripe
+		{
+			int d = (y-vMoveScreen) * 256 - t->window_height * 128 + spriteHeight * 128;
+			int texY = ((d * texHeight) / spriteHeight) / 256;
+			int color = AO; //get current color from the texture // not sure for this line // temp was Uint32 color = texture[sprite[spriteOrder[i]].texture][texWidth * texY + texX]; before
+			if((color & 0x00FFFFFF) != 0) ft_memcpy(t->img_ptr + 4 * t->window_width * y + stripe * 4, &color, sizeof(int));
+		}
+	}
+}
+
 void	ray(t_cub3d *t)
 {
 	t->x = -1;
@@ -129,6 +180,7 @@ void	ray(t_cub3d *t)
 	while (++t->x < t->window_width)
 	{
 		ray_casting_init(t, t->x);
+		t->zbuffer[t->x] = t->walldist;
 		t->lineheight = (int)(t->window_height / t->walldist);
 		t->start = -t->lineheight / 2 + t->window_height / 2;
 		if (t->start < 0)
@@ -141,6 +193,7 @@ void	ray(t_cub3d *t)
 		draw_wall(t->x, t->start - 1, t->end, t);
 		floor_and_ceiling(t, t->x);
 	}
+	draw_sprite(t);
 	mlx_put_image_to_window(t->mlx, t->win, t->img, 0, 0);
 	mlx_destroy_image(t->mlx, t->img);
 }
