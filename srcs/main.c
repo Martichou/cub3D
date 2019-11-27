@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:26:49 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/27 14:25:39 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/27 17:49:56 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int				main(int ac, char **av)
 	if (!cub3d(t))
 		return (error_printf());
 	ray(t);
-	system("afplay ./sounds/sound.mp3& 2&>/dev/null >/dev/null");
+	//system("afplay ./sounds/sound.mp3& 2&>/dev/null >/dev/null");
 	mlx_loop_hook(t->mlx, move, t);
 	mlx_loop(t->mlx);
 	return (0);

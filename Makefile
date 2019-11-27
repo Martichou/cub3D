@@ -6,7 +6,7 @@
 #    By: marandre <marandre@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/21 20:24:19 by marandre          #+#    #+#              #
-#    Updated: 2019/11/27 14:42:41 by marandre         ###   ########.fr        #
+#    Updated: 2019/11/27 17:50:18 by marandre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ OBJ_PATH = objs
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
 CC = clang
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Wextra
 
 CPPFLAGS = -I includes -I libft -I minilibx_opengl
 LDFLAGS = -L libft -L minilibx_opengl

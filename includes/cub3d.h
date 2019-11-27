@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:25:35 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/27 14:44:07 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/27 18:06:42 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@
 # define WALL_W				0x38dbe0
 # define AO					0x000000
 # define D					(double)
-#define texWidth			64
-#define texHeight			64
 
 typedef union
 {

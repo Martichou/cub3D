@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:47:52 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/27 14:48:35 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/27 18:06:39 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,6 @@ static void	floor_and_ceiling(t_cub3d *t, int x)
 
 static void	draw_sprites(t_cub3d *t)
 {
-	//int		num_sprites = 1;
-	//int		texture_number = 10;
 	double	x = 4.5;
 	double	y = 26.5;
 
@@ -161,15 +159,15 @@ static void	draw_sprites(t_cub3d *t)
 	//loop through every vertical stripe of the sprite on screen
 	for(int stripe = drawStartX; stripe < drawEndX; stripe++)
 	{
-		int texX = (int)(256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * texWidth / spriteWidth) / 256;
+		int texX = (int)(256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * 64 / spriteWidth) / 256;
 		if(transformY > 0 && stripe > 0 && stripe < t->window_width && transformY < t->zbuffer[stripe])
 			for(int y = drawStartY; y < drawEndY; y++) //for every pixel of the current stripe
 			{
 				int d = (y-vMoveScreen) * 256 - t->window_height * 128 + spriteHeight * 128;
-				int texY = ((d * texHeight) / spriteHeight) / 256;
+				int texY = ((d * 64) / spriteHeight) / 256;
 				int color = t->tex[10].data[texY % 64 * t->tex[10].sizeline + texX % 64 * t->tex[10].bpp / 8];
 				if((color & 0x00FFFFFF) != 0)
-					ft_memcpy(t->img_ptr + 4 * t->window_width * y + stripe * 4, &t->tex[10].data[texY % 64 * t->tex[10].sizeline + texX % 64 * t->tex[10].bpp / 8], sizeof(int));
+					ft_memcpy(t->img_ptr + 4 * t->window_width * y + stripe * 4, &color, sizeof(int));
 			}
 	}
 }
