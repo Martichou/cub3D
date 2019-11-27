@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:43:04 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/26 22:58:59 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/27 14:43:46 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,16 @@ int		move(t_cub3d *t)
 	}
 	if (t->move_right == 1)
 	{
+		if (t->map[(int)(t->x_pos + t->y_dir * t->ms)][(int)(t->y_pos)] == 0)
+			t->x_pos += t->y_dir * t->ms;
 		if (t->map[(int)(t->x_pos)][(int)(t->y_pos - t->x_dir * t->ms)] == 0)
 			t->y_pos -= t->x_dir * t->ms;
 	}
 	if (t->move_left == 1)
 	{
-		if (t->map[(int)(t->x_pos - t->x_dir * t->ms)][(int)(t->y_pos)] == 0)
+		if (t->map[(int)(t->x_pos - t->y_dir * t->ms)][(int)(t->y_pos)] == 0)
+			t->x_pos -= t->y_dir * t->ms;
+		if (t->map[(int)(t->x_pos)][(int)(t->y_pos + t->x_dir * t->ms)] == 0)
 			t->y_pos += t->x_dir * t->ms;
 	}
 	if (t->look_right == 1)
@@ -58,5 +62,6 @@ int		move(t_cub3d *t)
 	}
 	ray(t);
 	draw_gun(t);
+	fps(t);
 	return (0);
 }

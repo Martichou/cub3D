@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:25:35 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/27 01:43:27 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/27 14:44:07 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include <mlx.h>
+# include <time.h>
 
 # define TITLE 				"cub3D"
 
@@ -138,6 +139,7 @@ typedef struct				s_option_parser
 */
 int							error_printf();
 int							exit_program(t_cub3d *t);
+void						fps(t_cub3d *e);
 
 /*
 ** Deplacement functions
@@ -169,6 +171,7 @@ int							parse_ceilling_color(t_cub3d *t, char *line);
 int							parse_sprite_texture(t_cub3d *t, char *line);
 int							setup_sky(t_cub3d *t);
 int							setup_shotgun(t_cub3d *t);
+int							setup_barrel(t_cub3d *t);
 
 /*
 ** AO

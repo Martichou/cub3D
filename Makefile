@@ -6,7 +6,7 @@
 #    By: marandre <marandre@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/21 20:24:19 by marandre          #+#    #+#              #
-#    Updated: 2019/11/26 14:30:50 by marandre         ###   ########.fr        #
+#    Updated: 2019/11/27 14:42:41 by marandre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRC_PATH = srcs
 SRC_NAME = main.c utils.c move.c key.c ray.c draw.c \
 		parser/parser.c parser/parse_color.c parser/parse_map.c \
 		parser/parse_resolution.c parser/parse_textures.c \
-		parser/parse_sprite.c ao.c
+		parser/parse_sprite.c ao.c fps.c
 
 OBJ_PATH = objs
 OBJ_NAME = $(SRC_NAME:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:51:23 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/26 19:13:43 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/27 13:36:23 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void		animate_shotgun(t_cub3d *t, int posx, int posy)
 	else if (t->fr >= 7 && t->fr <= 9)
 		mlx_put_image_to_window(t->mlx, t->win, t->tex[9].img, posx, posy);
 	else if (t->fr >= 5 && t->fr <= 7)
-		mlx_put_image_to_window(t->mlx, t->win, t->tex[10].img, posx, posy);
+		mlx_put_image_to_window(t->mlx, t->win, t->tex[9].img, posx, posy);
 	else if (t->fr >= 1 && t->fr <= 4)
 		mlx_put_image_to_window(t->mlx, t->win, t->tex[7].img, posx, posy);
 	t->fr--;

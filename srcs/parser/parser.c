@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 20:36:16 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/26 15:46:13 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/27 13:19:17 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,6 @@ int     parse(t_cub3d *t, char *filename)
 		return (0);
 	setup_sky(t);
 	setup_shotgun(t);
+	setup_barrel(t);
 	return (1);
 }
