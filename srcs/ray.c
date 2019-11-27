@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:47:52 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/27 14:23:20 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/27 14:48:35 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,7 @@ static void	draw_sprites(t_cub3d *t)
 				int texY = ((d * texHeight) / spriteHeight) / 256;
 				int color = t->tex[10].data[texY % 64 * t->tex[10].sizeline + texX % 64 * t->tex[10].bpp / 8];
 				if((color & 0x00FFFFFF) != 0)
-					ft_memcpy(t->img_ptr + 4 * t->window_width * y + stripe * 4, &color, sizeof(int));
+					ft_memcpy(t->img_ptr + 4 * t->window_width * y + stripe * 4, &t->tex[10].data[texY % 64 * t->tex[10].sizeline + texX % 64 * t->tex[10].bpp / 8], sizeof(int));
 			}
 	}
 }
