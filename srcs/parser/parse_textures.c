@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 20:48:07 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/28 14:54:19 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/28 16:40:03 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,18 +99,5 @@ int	setup_shotgun(t_cub3d *t)
 	t->tex[9].img = mlx_xpm_file_to_image(t->mlx, "textures/gun5.xpm", &a, &b);
 	t->tex[9].data = mlx_get_data_addr(t->tex[9].img, &t->tex[9].bpp,
 			&t->tex[9].sizeline, &t->tex[9].endian);	
-	return (1);
-}
-
-int	setup_barrel(t_cub3d *t)
-{
-	int		a;
-	int		b;
-
-	a = 64;
-	b = 64;
-	t->tex[10].img = mlx_xpm_file_to_image(t->mlx, "textures/sprites/skeleton.xpm", &a, &b);
-	t->tex[10].data = mlx_get_data_addr(t->tex[10].img, &t->tex[10].bpp,
-			&t->tex[10].sizeline, &t->tex[10].endian);
 	return (1);
 }

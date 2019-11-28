@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:25:35 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/28 15:19:01 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/28 16:57:03 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,20 @@ typedef struct				s_tex
 	int						endian;
 }							t_tex;
 
+typedef struct				s_sprites
+{
+	double					x;
+	double					y;
+}							t_sprites;
+
 typedef struct				s_cub3d
 {
 	short					life;
-	t_tex					tex[11]; // the tex[10] is for the sprite
+	short					sprites_number;
+	t_tex					tex[11];
+	t_sprites				*sprites;
+	t_color					floor_color;
+	t_color					ceilling_color;
 	void					*mlx;
 	void					*win;
 	void					*img;
@@ -64,8 +74,6 @@ typedef struct				s_cub3d
 	int						**map;
 	int						window_width;
 	int						window_height;
-	t_color					floor_color;
-	t_color					ceilling_color;
 	int						nb_lines;
 	int						lenline;
 	int						bpp;

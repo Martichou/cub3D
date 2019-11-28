@@ -4,6 +4,7 @@ SO ./textures/mossy.xpm
 WE ./textures/stone.xpm
 EA ./textures/wood.xpm
 
+S ./textures/sprites/chest.xpm
 F 220,100,0
 C 225,30,0
 

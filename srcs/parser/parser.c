@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 20:36:16 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/27 13:19:17 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/28 16:56:16 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,20 @@ static int parse_line(t_cub3d *t, char *line)
 	return (0);
 }
 
+static int	count_sprites(char *line)
+{
+	int i;
+
+	i = 0;
+	while (*line)
+	{
+		if (*line == '2')
+			i++;
+		++line;
+	}
+	return (i);
+}
+
 static int	setup_map(t_cub3d *t, char *filename)
 {
 	int		fd;
@@ -51,13 +65,17 @@ static int	setup_map(t_cub3d *t, char *filename)
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
 		if (*line == '1')
+		{
+			t->sprites_number += count_sprites(line);
 			t->nb_lines++;
+		}
 		free(line);
 	}
 	close(fd);
 	if (ret == -1)
 		return (0);
-	if (!(t->map = (int **)malloc(sizeof(int *) * t->nb_lines)))
+	if (!(t->map = (int **)malloc(sizeof(int *) * t->nb_lines))
+		|| !(t->sprites = malloc(sizeof(t_sprites) * t->sprites_number)))
 		return (0);
 	return(1);
 }
@@ -86,6 +104,5 @@ int     parse(t_cub3d *t, char *filename)
 		return (0);
 	setup_sky(t);
 	setup_shotgun(t);
-	setup_barrel(t);
 	return (1);
 }
