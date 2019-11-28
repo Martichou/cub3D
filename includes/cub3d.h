@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:25:35 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/27 18:06:42 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/28 15:19:01 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct				s_tex
 
 typedef struct				s_cub3d
 {
+	short					life;
 	t_tex					tex[11]; // the tex[10] is for the sprite
 	void					*mlx;
 	void					*win;

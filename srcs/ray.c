@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:47:52 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/27 18:06:39 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/28 15:21:27 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,9 +136,9 @@ static void	draw_sprites(t_cub3d *t)
 	int spriteScreenX = (int)((t->window_width / 2) * (1 + transformX / transformY));
 
 	//parameters for scaling and moving the sprites
-	#define uDiv 1
-	#define vDiv 1
-	#define vMove 0.0
+	#define uDiv 2
+	#define vDiv 2
+	#define vMove 128.0
 	int vMoveScreen = (int)(vMove / transformY);
 
 	//calculate height of the sprite on screen
@@ -167,7 +167,7 @@ static void	draw_sprites(t_cub3d *t)
 				int texY = ((d * 64) / spriteHeight) / 256;
 				int color = t->tex[10].data[texY % 64 * t->tex[10].sizeline + texX % 64 * t->tex[10].bpp / 8];
 				if((color & 0x00FFFFFF) != 0)
-					ft_memcpy(t->img_ptr + 4 * t->window_width * y + stripe * 4, &color, sizeof(int));
+					ft_memcpy(t->img_ptr + 4 * t->window_width * y + stripe * 4, &t->tex[10].data[texY % 64 * t->tex[10].sizeline + texX % 64 * t->tex[10].bpp / 8], sizeof(int));
 			}
 	}
 }
