@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:47:52 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/29 18:44:10 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/29 20:47:40 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,7 @@ static void	floor_and_ceiling(t_cub3d *t, int x)
 			t->y = -1;
 			if (x < t->window_width && t->y < t->window_height)
 				while (++t->y < t->start)
-				{
-					//t->color = ft_add_ao(0xc9c3c3, ((t->y - t->min) * 100. / (t->max - t->min)));					
 					ft_memcpy(t->img_ptr + 4 * t->window_width * t->y + x * 4, &t->color, sizeof(int));
-				}
 		}
 	}
 	if (t->end > 0)
@@ -112,10 +109,7 @@ static void	floor_and_ceiling(t_cub3d *t, int x)
 		t->y = t->end - 1;
 		if (x < t->window_width && t->y < t->window_height)
 			while (++t->y < t->window_height)
-			{
-				//t->color = ft_gt_colors(t->color, AO, ((((t->x_sidedist + t->y_sidedist) / 2) / 5) / ((4. - (2. * (float)(1))) - 0.4)));
 				ft_memcpy(t->img_ptr + 4 * t->window_width * t->y + x * 4, &t->color, sizeof(int));
-			}
 	}
 }
 

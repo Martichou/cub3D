@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:25:35 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/29 18:43:54 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/29 20:30:21 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,6 +193,5 @@ int							setup_barrel(t_cub3d *t);
 */
 int							ft_gt_colors(int clr1, int clr2, double val);
 int							ft_shade_color(int clr, double val);
-int							ft_add_ao(int clr, double percent);
 
 #endif

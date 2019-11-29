@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:51:23 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/29 16:10:12 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/29 20:10:25 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ void		draw_wall(int x, int start, int end, t_cub3d *t)
 		t->x_text = abs(t->x_text);
 	}
 	while (++start <= end)
-		put_pxl_to_img(t, x, start,
-			ft_add_ao(t->color, ((start - t->min) * 100. / (t->max - t->min))));
+		put_pxl_to_img(t, x, start, t->color);
 }
 
 void	draw_sky(t_cub3d *t)

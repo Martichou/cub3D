@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:26:49 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/29 18:22:35 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/29 20:59:24 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int				main(int ac, char **av)
 	mlx_hook(t->win, 17, 0L, exit_program, t);
 	mlx_hook(t->win, 2, (1L << 0), key_press, t);
 	mlx_hook(t->win, 3, (1L << 1), key_release, t);
+	mlx_hook(t->win, 17L, 0, exit_program, t);
 	mlx_mouse_hook(t->win, mouse_hook, t);
 	if (!cub3d(t))
 		return (error_printf());

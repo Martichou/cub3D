@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:32:01 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/29 18:44:02 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/29 20:42:10 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 int		exit_program(t_cub3d *t)
 {
-	int i = 0;
+	int i;
+
+	printf("Closing...\n");
+	i = 0;
 	while (i < t->nb_lines)
 		free(t->map[i++]);
 	free(t->map);
+	free(t->sprites);
 	t->map = NULL;
 	system("killall afplay 2&>/dev/null >/dev/null");
 	mlx_clear_window(t->mlx, t->win);
