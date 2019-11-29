@@ -1,4 +1,4 @@
-R 1024 768
+R 1080 768
 NO ./textures/redbrick.xpm
 SO ./textures/mossy.xpm
 WE ./textures/stone.xpm
