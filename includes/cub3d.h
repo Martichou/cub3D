@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:25:35 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/29 17:32:58 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/29 18:43:54 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct				s_sprites
 
 typedef struct				s_cub3d
 {
+	short					is_save;
 	short					life;
 	short					sprites_number;
 	short					bullets;
@@ -152,6 +153,7 @@ int							error_printf();
 int							exit_program(t_cub3d *t);
 void						fps(t_cub3d *e);
 void						sort_sprites(int* order, double* dist, int amount);
+int							save_bmp(t_cub3d *t);
 
 /*
 ** Deplacement functions

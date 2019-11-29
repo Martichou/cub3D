@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:26:49 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/29 16:56:54 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/29 18:22:35 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static int		cub3d(t_cub3d *t)
 	t->life = 100;
 	t->bullets = 8;
 	t->reload = 0;
+	if (!t->is_save)
+		t->is_save = 0;
 	if (!(t->zbuffer = malloc(sizeof(double) * t->window_width)))
 		return (0);
 	return (1);
@@ -46,7 +48,16 @@ int				main(int ac, char **av)
 	if (ft_strchr_at_end(av[1], ".cub") == -1)
 		return (error_printf());
 	if (ac > 2)
-		t->name = av[2];
+	{
+		if (ft_strncmp(av[2], "--save", ft_strlen(av[2])) == 0)
+		{
+			t->name = av[0];
+			t->is_save = 1;
+			printf("Saving image\n");
+		}
+		else
+			t->name = av[2];
+	}
 	else
 		t->name = av[0];	
 	t->mlx = mlx_init();

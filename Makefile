@@ -6,7 +6,7 @@
 #    By: marandre <marandre@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/21 20:24:19 by marandre          #+#    #+#              #
-#    Updated: 2019/11/28 15:12:35 by marandre         ###   ########.fr        #
+#    Updated: 2019/11/29 18:49:26 by marandre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRC_PATH = srcs
 SRC_NAME = main.c utils.c move.c key.c ray.c draw.c \
 		parser/parser.c parser/parse_color.c parser/parse_map.c \
 		parser/parse_resolution.c parser/parse_textures.c \
-		parser/parse_sprite.c ao.c fps.c
+		parser/parse_sprite.c ao.c fps.c bmp.c
 
 OBJ_PATH = objs
 OBJ_NAME = $(SRC_NAME:.c=.o)
@@ -36,6 +36,8 @@ OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 all: libft minilibx_all $(NAME)
 
 $(NAME): $(OBJ) libft/libft.a
+	@rm -rf screenshot.bmp
+	@echo "" > screenshot.bmp
 	@$(CC) $(LDFLAGS) $(LDLIBS) $^ -o $@
 	@echo "Compilation of cub3D:	\033[1;32mOK\033[m"
 
@@ -53,6 +55,7 @@ clean:
 	@echo "cub3D:	Removing Objs"
 
 fclean:
+	@rm -rf screenshot.bmp
 	@make -C libft fclean
 	@rm -f $(OBJ)
 	@rmdir $(OBJ_PATH) 2> /dev/null || true

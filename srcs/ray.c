@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:47:52 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/29 17:39:27 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/29 18:44:10 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,12 @@ void	ray(t_cub3d *t)
 		floor_and_ceiling(t, t->x);
 	}
 	draw_sprites(t);
-	mlx_put_image_to_window(t->mlx, t->win, t->img, 0, 0);
+	if (t->is_save)
+	{
+		save_bmp(t);
+		exit_program(t);
+	}
+	else
+		mlx_put_image_to_window(t->mlx, t->win, t->img, 0, 0);
 	mlx_destroy_image(t->mlx, t->img);
 }
