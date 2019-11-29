@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 14:42:06 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/28 15:20:18 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/29 16:57:06 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ void	fps(t_cub3d *t)
 	static int		timestamp;
 	static int		fps;
 	static int		fps_2;
+	int i;
 
+	i = 0;
 	if (time(NULL) != timestamp)
 	{
 		fps_2 = fps;
@@ -26,8 +28,13 @@ void	fps(t_cub3d *t)
 	}
 	else
 		fps++;
-	mlx_string_put(t->mlx, t->win, 10, 15, 0xFFFFFF, "FPS  :");
-	mlx_string_put(t->mlx, t->win, 70, 15, 0xFFFFFF, ft_itoa(fps_2));
-	mlx_string_put(t->mlx, t->win, 10, 30, 0xFF0000, "LIFE  :");
-	mlx_string_put(t->mlx, t->win, 70, 30, 0xFF0000, ft_itoa(t->life));
+	mlx_string_put(t->mlx, t->win, 10, 20, 0xffffff, t->name);
+	mlx_string_put(t->mlx, t->win, t->window_width - 20, 20, 0xe5e500, ft_itoa(fps_2 + 1));
+	while (i++ < t->life)
+		mlx_string_put(t->mlx, t->win, 10 + i, t->window_height - 10, 0xFF0000, "|");
+	while (i++ < 100)
+		mlx_string_put(t->mlx, t->win, 10 + i, t->window_height - 10, 0x808080, "|");
+	mlx_string_put(t->mlx, t->win, t->window_width - 30, t->window_height - 10, 0xffffff, ft_itoa(t->bullets));
+	mlx_string_put(t->mlx, t->win, t->window_width - 30, t->window_height - 10, 0xffffff, " /8");
+	mlx_string_put(t->mlx, t->win, t->window_width / 2, t->window_height / 2, 0xffffff, ".");
 }

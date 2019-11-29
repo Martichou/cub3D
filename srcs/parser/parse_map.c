@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 21:01:10 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/29 15:03:28 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/29 17:37:40 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,17 @@ int	parse_map(t_cub3d *t, char *line)
 		else
 		{
 			t->map[i][j] = ft_atoi(&line[k]);
-			if (t->map[i][j] == 2)
+			if (t->map[i][j] == 2 || t->map[i][j] == 3)
 			{
 				// Save the sprites and x and y and increment counter of sprites
 				if (sp > 0)
 				{
 					t->sprites[sp - 1].x = i;
 					t->sprites[sp - 1].y = j;
+					if (t->map[i][j] == 2)
+						t->sprites[sp - 1].tex_index = 10;
+					else if (t->map[i][j] == 3)
+						t->sprites[sp - 1].tex_index = 11;
 					t->map[i][j] = 0;
 					sp--;
 				}

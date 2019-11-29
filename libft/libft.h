@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 11:15:20 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/26 13:46:40 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/29 15:14:39 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,7 @@ t_list				*ft_lstnew(void *content);
 int					ft_lstsize(t_list *lst);
 int					get_next_line(int fd, char **line);
 int					ft_strchr_at_end(char *str, char *find);
+void				swap_double(double *xp, double *yp);
+void				swap_int(int *xp, int *yp);
 
 #endif

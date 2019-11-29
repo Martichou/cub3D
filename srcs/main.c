@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:26:49 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/29 14:23:23 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/29 16:56:54 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static int		cub3d(t_cub3d *t)
 	t->shooting = 0;
 	t->fr = 17;
 	t->life = 100;
+	t->bullets = 8;
+	t->reload = 0;
 	if (!(t->zbuffer = malloc(sizeof(double) * t->window_width)))
 		return (0);
 	return (1);
@@ -37,12 +39,16 @@ int				main(int ac, char **av)
 {
 	t_cub3d *t;
 	(void)av;
-	if (ac != 2)
+	if (ac < 2)
 		return (error_printf());
 	if (!(t = ft_calloc(sizeof(t_cub3d), 1)))
 		return (error_printf());
 	if (ft_strchr_at_end(av[1], ".cub") == -1)
 		return (error_printf());
+	if (ac > 2)
+		t->name = av[2];
+	else
+		t->name = av[0];	
 	t->mlx = mlx_init();
 	t->sprites_number = 0;
 	if (!(parse(t, av[1])))

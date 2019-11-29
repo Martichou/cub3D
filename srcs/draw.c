@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:51:23 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/27 13:36:23 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/29 16:10:12 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,23 +62,28 @@ void	draw_sky(t_cub3d *t)
 
 static void		animate_shotgun(t_cub3d *t, int posx, int posy)
 {
-	if (t->fr >= 15)
+	if (t->fr >= 15 && t->reload == 0)
 		mlx_put_image_to_window(t->mlx, t->win, t->tex[6].img, posx, posy);
-	else if (t->fr >= 12 && t->fr <= 14)
+	else if (t->fr >= 12 && t->fr <= 14 && t->reload == 0)
 		mlx_put_image_to_window(t->mlx, t->win, t->tex[7].img, posx, posy);
-	else if (t->fr >= 10 && t->fr <= 11)
+	else if (t->fr >= 10 && t->fr <= 11 && t->reload == 0)
 		mlx_put_image_to_window(t->mlx, t->win, t->tex[8].img, posx, posy);
-	else if (t->fr >= 7 && t->fr <= 9)
+	else if (t->fr >= 7 && t->fr <= 9 && t->reload == 0)
 		mlx_put_image_to_window(t->mlx, t->win, t->tex[9].img, posx, posy);
-	else if (t->fr >= 5 && t->fr <= 7)
+	else if (t->fr >= 5 && t->fr <= 7 && t->reload == 0)
 		mlx_put_image_to_window(t->mlx, t->win, t->tex[9].img, posx, posy);
-	else if (t->fr >= 1 && t->fr <= 4)
+	else if (t->fr >= 1 && t->fr <= 4 && t->reload == 0)
 		mlx_put_image_to_window(t->mlx, t->win, t->tex[7].img, posx, posy);
 	t->fr--;
 	if (t->fr == 1)
 	{
 		t->fr = 17;
 		t->shooting = 0;
+		if (t->reload == 1)
+		{
+			t->bullets = 8;
+			t->reload = 0;
+		}
 	}
 }
 
@@ -94,7 +99,15 @@ void	draw_gun(t_cub3d *t)
 	else
 	{
 		if (t->fr == 17 && (t->fr--))
-			system("afplay ./sounds/shot.mp3& 2&>/dev/null >/dev/null");
+		{
+			if (t->bullets > 0)
+			{
+				t->bullets--;
+				system("afplay ./sounds/shot.mp3& 2&>/dev/null >/dev/null");
+			}
+			else
+				t->reload = 1;
+		}
 		animate_shotgun(t, posx, posy);
 	}
 }

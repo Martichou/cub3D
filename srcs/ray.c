@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:47:52 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/29 14:59:42 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/29 17:39:27 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,49 +119,6 @@ static void	floor_and_ceiling(t_cub3d *t, int x)
 	}
 }
 
-void swap_double(double* xp, double* yp) 
-{ 
-    if (xp == yp) // Check if the two addresses are same 
-        return; 
-    *xp = *xp + *yp; 
-    *yp = *xp - *yp; 
-    *xp = *xp - *yp; 
-}
-
-void swap_int(int* xp, int* yp) 
-{ 
-    if (xp == yp) // Check if the two addresses are same 
-        return; 
-    *xp = *xp + *yp; 
-    *yp = *xp - *yp; 
-    *xp = *xp - *yp; 
-} 
-
-void combSort(int* order, double* dist, int amount)
-{
-	int gap = amount;
-	int swapped = 0;
-	while(gap > 1 || swapped)
-	{
-		gap = (gap * 10) / 13;
-		if(gap == 9 || gap == 10)
-			gap = 11;
-		if (gap < 1)
-			gap = 1;
-		swapped = 0;
-		for (int i = 0; i < amount - gap; i++)
-		{
-			int j = i + gap;
-			if (dist[i] < dist[j])
-			{
-				swap_double(&dist[i], &dist[j]);
-				swap_int(&order[i], &order[j]);
-				swapped = 1;
-			}
-		}
-	}
-}
-
 static void	draw_sprites(t_cub3d *t)
 {
 	int spriteOrder[t->sprites_number];
@@ -175,7 +132,7 @@ static void	draw_sprites(t_cub3d *t)
     	spriteDistance[i] = ((t->x_pos - t->sprites[i].x) * (t->x_pos - t->sprites[i].x) + (t->y_pos - t->sprites[i].y) * (t->y_pos - t->sprites[i].y));
 		i++;
 	}
-	combSort(spriteOrder, spriteDistance, t->sprites_number);
+	sort_sprites(spriteOrder, spriteDistance, t->sprites_number);
 
 	i = 0;
 	while (i < t->sprites_number)
@@ -222,9 +179,9 @@ static void	draw_sprites(t_cub3d *t)
 				{
 					int d = (y-vMoveScreen) * 256 - t->window_height * 128 + spriteHeight * 128;
 					int texY = ((d * 64) / spriteHeight) / 256;
-					int color = t->tex[10].data[texY % 64 * t->tex[10].sizeline + texX % 64 * t->tex[10].bpp / 8];
+					int color = t->tex[t->sprites[spriteOrder[i]].tex_index].data[texY % 64 * t->tex[t->sprites[spriteOrder[i]].tex_index].sizeline + texX % 64 * t->tex[t->sprites[spriteOrder[i]].tex_index].bpp / 8];
 					if((color & 0x00FFFFFF) != 0)
-						ft_memcpy(t->img_ptr + 4 * t->window_width * y + stripe * 4, &t->tex[10].data[texY % 64 * t->tex[10].sizeline + texX % 64 * t->tex[10].bpp / 8], sizeof(int));
+						ft_memcpy(t->img_ptr + 4 * t->window_width * y + stripe * 4, &t->tex[t->sprites[spriteOrder[i]].tex_index].data[texY % 64 * t->tex[t->sprites[spriteOrder[i]].tex_index].sizeline + texX % 64 * t->tex[t->sprites[spriteOrder[i]].tex_index].bpp / 8], sizeof(int));
 				}
 		}
 		i++;

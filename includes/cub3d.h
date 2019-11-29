@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:25:35 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/29 14:58:15 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/29 17:32:58 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,17 @@ typedef struct				s_sprites
 {
 	int						x;
 	int						y;
+	int						tex_index;
 }							t_sprites;
 
 typedef struct				s_cub3d
 {
 	short					life;
 	short					sprites_number;
-	t_tex					tex[11];
+	short					bullets;
+	short					reload;
+	char					*name;
+	t_tex					tex[12];
 	t_sprites				*sprites;
 	t_color					floor_color;
 	t_color					ceilling_color;
@@ -147,6 +151,7 @@ typedef struct				s_option_parser
 int							error_printf();
 int							exit_program(t_cub3d *t);
 void						fps(t_cub3d *e);
+void						sort_sprites(int* order, double* dist, int amount);
 
 /*
 ** Deplacement functions
@@ -175,7 +180,8 @@ int							parse_south_texture(t_cub3d *t, char *line);
 int							parse_north_texture(t_cub3d *t, char *line);
 int							parse_floor_color(t_cub3d *t, char *line);
 int							parse_ceilling_color(t_cub3d *t, char *line);
-int							parse_sprite_texture(t_cub3d *t, char *line);
+int							parse_sprite_texture_10(t_cub3d *t, char *line);
+int							parse_sprite_texture_11(t_cub3d *t, char *line);
 int							setup_sky(t_cub3d *t);
 int							setup_shotgun(t_cub3d *t);
 int							setup_barrel(t_cub3d *t);

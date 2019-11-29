@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 20:36:16 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/29 14:21:31 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/29 17:40:00 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static t_option_parser	option_parsers[] =
 	{"SO", parse_south_texture, 2},
 	{"WE", parse_west_texture, 2},
 	{"EA", parse_east_texture, 2},
-	{"S", parse_sprite_texture, 1},
+	{"S", parse_sprite_texture_10, 1},
+	{"X", parse_sprite_texture_11, 1},
 	{"F", parse_floor_color, 1},
 	{"C", parse_ceilling_color, 1},
 	{"1", parse_map, 0}
@@ -71,7 +72,6 @@ static int	setup_map(t_cub3d *t, char *filename)
 		}
 		free(line);
 	}
-	printf("Number of sprites %d\n", t->sprites_number);
 	close(fd);
 	if (ret == -1)
 		return (0);
