@@ -6,13 +6,13 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 18:39:55 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/29 18:43:31 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/29 18:55:12 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-static void set_int_in_char(unsigned char *start, int value)
+static void int_as_char(unsigned char *start, int value)
 {
 	start[0] = (unsigned char)(value);
 	start[1] = (unsigned char)(value >> 8);
@@ -20,24 +20,18 @@ static void set_int_in_char(unsigned char *start, int value)
 	start[3] = (unsigned char)(value >> 24);
 }
 
-static int write_bmp_header(int fd, int filesize, t_cub3d *t)
+static int write_header(int fd, int filesize, t_cub3d *t)
 {
-	int				i;
-	int				tmp;
-	unsigned char	bmpfileheader[54];
+	unsigned char	*bmpfileheader;
 
-	i = 0;
-	while (i < 54)
-		bmpfileheader[i++] = (unsigned char)(0);
+	bmpfileheader = ft_calloc(54, sizeof(unsigned char));
 	bmpfileheader[0] = (unsigned char)('B');
 	bmpfileheader[1] = (unsigned char)('M');
-	set_int_in_char(bmpfileheader + 2, filesize);
+	int_as_char(bmpfileheader + 2, filesize);
 	bmpfileheader[10] = (unsigned char)(54);
 	bmpfileheader[14] = (unsigned char)(40);
-	tmp = t->window_width;
-	set_int_in_char(bmpfileheader + 18, tmp);
-	tmp = t->window_height;
-	set_int_in_char(bmpfileheader + 22, tmp);
+	int_as_char(bmpfileheader + 18, t->window_width);
+	int_as_char(bmpfileheader + 22, t->window_height);
 	bmpfileheader[27] = (unsigned char)(1);
 	bmpfileheader[28] = (unsigned char)(24);
 	return (!(write(fd, bmpfileheader, 54) < 0));
@@ -45,17 +39,14 @@ static int write_bmp_header(int fd, int filesize, t_cub3d *t)
 
 static int get_color(t_cub3d *t, int x, int y)
 {
-	int	rgb;
 	int	color;
 
-	color = *(int*)(t->img_ptr
-			+ (4 * (int)t->window_width * ((int)t->window_height - 1 - y))
-			+ (4 * x));
-	rgb = (color & 0xFF0000) | (color & 0x00FF00) | (color & 0x0000FF);
-	return (rgb);
+	color = *(int*)(t->img_ptr + (4 * (int)t->window_width *
+        ((int)t->window_height - 1 - y)) + (4 * x));
+	return ((color & 0xFF0000) | (color & 0x00FF00) | (color & 0x0000FF));
 }
 
-static int write_bmp_data(int file, t_cub3d *t, int pad)
+static int write_data(int file, t_cub3d *t, int pad)
 {
 	const unsigned char	zero[3] = {0, 0, 0};
 	int					i;
@@ -90,9 +81,9 @@ int save_bmp(t_cub3d *t)
 	filesize = 54 + (3 * ((int)t->window_width + pad) * (int)t->window_height);
 	if ((file = open("screenshot.bmp", O_WRONLY | O_CREAT | O_TRUNC | O_APPEND)) < 0)
 		return (0);
-	if (!write_bmp_header(file, filesize, t))
+	if (!write_header(file, filesize, t))
 		return (0);
-	if (!write_bmp_data(file, t, pad))
+	if (!write_data(file, t, pad))
 		return (0);
 	close(file);
 	return (1);
