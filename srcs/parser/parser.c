@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 20:36:16 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/29 17:40:00 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/29 17:55:23 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	count_sprites(char *line)
 	i = 0;
 	while (*line)
 	{
-		if (*line == '2')
+		if (*line == '2' || *line == '3')
 			i++;
 		++line;
 	}
