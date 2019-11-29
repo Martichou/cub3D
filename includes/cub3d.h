@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:25:35 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/28 16:57:03 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/29 14:58:15 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ typedef struct				s_tex
 
 typedef struct				s_sprites
 {
-	double					x;
-	double					y;
+	int						x;
+	int						y;
 }							t_sprites;
 
 typedef struct				s_cub3d

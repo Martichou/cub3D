@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 21:01:10 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/28 16:58:06 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/29 15:03:28 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	parse_map(t_cub3d *t, char *line)
 	static int i;
 	int j;
 	int k;
+	static int sp;
 
 	if (!i)
 		i = 0;
@@ -42,6 +43,8 @@ int	parse_map(t_cub3d *t, char *line)
 	if (!(t->map[i] = (int *)malloc(sizeof(int) * t->lenline)))
 		return (0);
 	j = -1;
+	if (!sp)
+		sp = t->sprites_number;
 	while (++j < t->lenline)
 	{
 		if (line[k] == ' ')
@@ -59,12 +62,12 @@ int	parse_map(t_cub3d *t, char *line)
 			if (t->map[i][j] == 2)
 			{
 				// Save the sprites and x and y and increment counter of sprites
-				if (t->sprites_number >= 0)
+				if (sp > 0)
 				{
-					t->sprites[t->sprites_number - 1].x = i;
-					t->sprites[t->sprites_number - 1].y = j;
-					if (t->sprites_number != 0)
-						t->sprites_number--;
+					t->sprites[sp - 1].x = i;
+					t->sprites[sp - 1].y = j;
+					t->map[i][j] = 0;
+					sp--;
 				}
 			}
 		}

@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 20:36:16 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/28 16:56:16 by marandre         ###   ########.fr       */
+/*   Updated: 2019/11/29 14:21:31 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ static int	setup_map(t_cub3d *t, char *filename)
 		}
 		free(line);
 	}
+	printf("Number of sprites %d\n", t->sprites_number);
 	close(fd);
 	if (ret == -1)
 		return (0);
