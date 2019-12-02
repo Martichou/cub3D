@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:26:49 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/29 20:59:24 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/03 00:00:25 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 static int		cub3d(t_cub3d *t)
 {
-	t->x_dir = -1;
-	t->y_plane = 0.66;
 	t->ms = 0.05;
 	t->rs = 0.05;
 	t->lenline = -1;

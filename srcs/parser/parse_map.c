@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 21:01:10 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/29 19:35:45 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/03 00:00:34 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,38 @@ int	parse_map(t_cub3d *t, char *line)
 		if (line[k] == 'N' || line[k] == 'E'
 			|| line[k] == 'S' || line[k] == 'W')
 		{
+			// N = -1	S = 1		E = 0.		W = 0.
+			// N = 0.	S = 0.		E = 1.		W = -1.
+			// N = 0.	S = 0.		E = FOV		W = -FOV
+			// N = FOV	S = -FOV	E = 0.		W = 0.
+			if (line[k] == 'N')
+			{
+				t->x_dir = -1;
+				t->y_dir = 0.;
+				t->x_plane = 0.;
+				t->y_plane = FOV;
+			}
+			else if (line[k] == 'S')
+			{
+				t->x_dir = 1;
+				t->y_dir = 0.;
+				t->x_plane = 0.;
+				t->y_plane = -FOV;
+			}
+			else if (line[k] == 'E')
+			{
+				t->x_dir = 0.;
+				t->y_dir = 1.;
+				t->x_plane = FOV;
+				t->y_plane = 0.;
+			}
+			else if (line[k] == 'W')
+			{
+				t->x_dir = 0.;
+				t->y_dir = -1.;
+				t->x_plane = -FOV;
+				t->y_plane = 0.;
+			}
 			t->x_pos = i;
 			t->y_pos = j;
 			t->map[i][j] = 0;
