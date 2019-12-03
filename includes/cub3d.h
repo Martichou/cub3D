@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:25:35 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/03 16:10:30 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/03 17:53:29 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,24 @@ typedef struct				s_sprites
 	int						tex_index;
 }							t_sprites;
 
+typedef struct				s_player
+{
+	short					life;
+	short					bullets;
+	char					*name;
+	int						shooting;
+	int						fr;
+	short					reload;
+	int						chest_collected;
+	int						chest_to_collect;
+	int						ended;
+}							t_player;
+
 typedef struct				s_cub3d
 {
+	t_player				*player;
 	short					is_save;
-	short					life;
 	short					sprites_number;
-	short					bullets;
-	short					reload;
-	char					*name;
 	t_tex					tex[12];
 	t_sprites				*sprites;
 	t_color					floor_color;
@@ -108,8 +118,6 @@ typedef struct				s_cub3d
 	int						y;
 	int						min;
 	int						max;
-	int						shooting;
-	int						fr;
 	double					*zbuffer; // walldist for each vertical lines
 	double					x_pos;
 	double					y_pos;

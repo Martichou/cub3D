@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:26:49 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/03 00:00:25 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/03 17:44:12 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ static int		cub3d(t_cub3d *t)
 	t->ms = 0.05;
 	t->rs = 0.05;
 	t->lenline = -1;
-	t->shooting = 0;
-	t->fr = 17;
-	t->life = 100;
-	t->bullets = 8;
-	t->reload = 0;
+	t->player->shooting = 0;
+	t->player->fr = 17;
+	t->player->life = 100;
+	t->player->bullets = 8;
+	t->player->reload = 0;
 	if (!t->is_save)
 		t->is_save = 0;
 	if (!(t->zbuffer = malloc(sizeof(double) * t->window_width)))
@@ -43,21 +43,22 @@ int				main(int ac, char **av)
 		return (error_printf());
 	if (!(t = ft_calloc(sizeof(t_cub3d), 1)))
 		return (error_printf());
+	if (!(t->player = ft_calloc(sizeof(t_player), 1)))
+		return (error_printf());
 	if (ft_strchr_at_end(av[1], ".cub") == -1)
 		return (error_printf());
 	if (ac > 2)
 	{
 		if (ft_strncmp(av[2], "--save", ft_strlen(av[2])) == 0)
 		{
-			t->name = av[0];
+			t->player->name = av[0];
 			t->is_save = 1;
-			printf("Saving image\n");
 		}
 		else
-			t->name = av[2];
+			t->player->name = av[2];
 	}
 	else
-		t->name = av[0];	
+		t->player->name = av[0];
 	t->mlx = mlx_init();
 	t->sprites_number = 0;
 	if (!(parse(t, av[1])))
@@ -70,7 +71,6 @@ int				main(int ac, char **av)
 	mlx_mouse_hook(t->win, mouse_hook, t);
 	if (!cub3d(t))
 		return (error_printf());
-	ray(t);
 	//system("afplay ./sounds/sound.mp3& 2&>/dev/null >/dev/null");
 	mlx_loop_hook(t->mlx, move, t);
 	mlx_loop(t->mlx);

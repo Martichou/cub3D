@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 21:01:10 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/03 00:00:34 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/03 17:30:52 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ int	parse_map(t_cub3d *t, char *line)
 			t->map[i][j] = ft_atoi(&line[k]);
 			if (t->map[i][j] == 2 || t->map[i][j] == 3)
 			{
-				// Save the sprites and x and y and increment counter of sprites
+				if (t->map[i][j] == 2)
+					t->player->chest_to_collect++;
 				if (sp > 0)
 				{
 					t->sprites[sp - 1].x = i;
@@ -102,7 +103,6 @@ int	parse_map(t_cub3d *t, char *line)
 						t->sprites[sp - 1].tex_index = 10;
 					else if (t->map[i][j] == 3)
 						t->sprites[sp - 1].tex_index = 11;
-					t->map[i][j] = 0;
 					sp--;
 				}
 			}

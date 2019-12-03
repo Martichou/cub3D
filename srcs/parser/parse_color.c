@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 20:52:33 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/03 16:35:43 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/03 16:50:35 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int				parse_floor_color(t_cub3d *t, char *line)
 {
-	int color = 0;
 	line++;
 	if ((t->floor_color.rgb.r = ft_atoi(line)) > 255)
 		return (0);

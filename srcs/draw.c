@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:51:23 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/29 20:10:25 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/03 16:48:45 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,27 +61,27 @@ void	draw_sky(t_cub3d *t)
 
 static void		animate_shotgun(t_cub3d *t, int posx, int posy)
 {
-	if (t->fr >= 15 && t->reload == 0)
+	if (t->player->fr >= 15 && t->player->reload == 0)
 		mlx_put_image_to_window(t->mlx, t->win, t->tex[6].img, posx, posy);
-	else if (t->fr >= 12 && t->fr <= 14 && t->reload == 0)
+	else if (t->player->fr >= 12 && t->player->fr <= 14 && t->player->reload == 0)
 		mlx_put_image_to_window(t->mlx, t->win, t->tex[7].img, posx, posy);
-	else if (t->fr >= 10 && t->fr <= 11 && t->reload == 0)
+	else if (t->player->fr >= 10 && t->player->fr <= 11 && t->player->reload == 0)
 		mlx_put_image_to_window(t->mlx, t->win, t->tex[8].img, posx, posy);
-	else if (t->fr >= 7 && t->fr <= 9 && t->reload == 0)
+	else if (t->player->fr >= 7 && t->player->fr <= 9 && t->player->reload == 0)
 		mlx_put_image_to_window(t->mlx, t->win, t->tex[9].img, posx, posy);
-	else if (t->fr >= 5 && t->fr <= 7 && t->reload == 0)
+	else if (t->player->fr >= 5 && t->player->fr <= 7 && t->player->reload == 0)
 		mlx_put_image_to_window(t->mlx, t->win, t->tex[9].img, posx, posy);
-	else if (t->fr >= 1 && t->fr <= 4 && t->reload == 0)
+	else if (t->player->fr >= 1 && t->player->fr <= 4 && t->player->reload == 0)
 		mlx_put_image_to_window(t->mlx, t->win, t->tex[7].img, posx, posy);
-	t->fr--;
-	if (t->fr == 1)
+	t->player->fr--;
+	if (t->player->fr == 1)
 	{
-		t->fr = 17;
-		t->shooting = 0;
-		if (t->reload == 1)
+		t->player->fr = 17;
+		t->player->shooting = 0;
+		if (t->player->reload == 1)
 		{
-			t->bullets = 8;
-			t->reload = 0;
+			t->player->bullets = 8;
+			t->player->reload = 0;
 		}
 	}
 }
@@ -93,19 +93,19 @@ void	draw_gun(t_cub3d *t)
 
 	posx = (t->window_width - 400) / 2;
 	posy = t->window_height - 400;
-	if (t->shooting == 0)
+	if (t->player->shooting == 0)
 		mlx_put_image_to_window(t->mlx, t->win, t->tex[5].img, posx, posy);
 	else
 	{
-		if (t->fr == 17 && (t->fr--))
+		if (t->player->fr == 17 && (t->player->fr--))
 		{
-			if (t->bullets > 0)
+			if (t->player->bullets > 0)
 			{
-				t->bullets--;
+				t->player->bullets--;
 				system("afplay ./sounds/shot.mp3& 2&>/dev/null >/dev/null");
 			}
 			else
-				t->reload = 1;
+				t->player->reload = 1;
 		}
 		animate_shotgun(t, posx, posy);
 	}

@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:47:52 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/03 16:34:44 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/03 17:30:44 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	dda(t_cub3d *t)
 			}
 			t->color = ft_gt_colors(t->color, AO, ((t->y_sidedist / 7) / ((4. - (2. * (float)(1))) - 0.4)));
 		}
-		if (t->map[t->x_map][t->y_map] > 0)
+		if (t->map[t->x_map][t->y_map] == 1)
 			t->hit = 1;
 	}
 }

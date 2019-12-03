@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:44:41 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/26 22:55:12 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/03 16:47:55 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		key_press(int keycode, t_cub3d *t)
 		t->texture = (t->texture == 1) ? 0 : 1;
 	}
 	else if (keycode == 49)
-		t->shooting = 1;
+		t->player->shooting = 1;
 	return (0);
 }
 
