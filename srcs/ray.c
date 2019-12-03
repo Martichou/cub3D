@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:47:52 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/29 20:47:40 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/03 16:34:44 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static void	floor_and_ceiling(t_cub3d *t, int x)
 	{
 		if (t->start > 0)
 		{
-			t->color = AO;
+			t->color = t->ceilling_color.hexcode;
 			t->y = -1;
 			if (x < t->window_width && t->y < t->window_height)
 				while (++t->y < t->start)
@@ -105,7 +105,7 @@ static void	floor_and_ceiling(t_cub3d *t, int x)
 	if (t->end > 0)
 	{
 
-		t->color = AO;
+		t->color = t->floor_color.hexcode;
 		t->y = t->end - 1;
 		if (x < t->window_width && t->y < t->window_height)
 			while (++t->y < t->window_height)

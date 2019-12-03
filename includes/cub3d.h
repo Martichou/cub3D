@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:25:35 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/02 23:07:30 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/03 16:10:30 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ typedef union
 	unsigned int			hexcode;
 	struct
 	{
-		unsigned char		empty;
 		unsigned char		r;
 		unsigned char		g;
 		unsigned char		b;
