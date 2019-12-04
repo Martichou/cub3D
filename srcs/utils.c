@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:32:01 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/04 13:50:20 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/04 16:53:48 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,21 @@ int		exit_program(t_cub3d *t)
 	int i;
 
 	i = 0;
-	if (t->map)
-	{
-		while (i < t->nb_lines)
-			free(t->map[i++]);
-		free(t->map);
-		t->map = NULL;
-	}
-	if (t->sprites)
-		free(t->sprites);
-	system("killall afplay 2&>/dev/null >/dev/null");
+	while (i < t->nb_lines)
+		free(t->map[i++]);
+	free(t->map);
+	t->map = NULL;
+	free(t->sprites);
+	t->sprites = NULL;
+	free(t->zbuffer);
+	t->zbuffer = NULL;
+	free(t->player);
+	t->player = NULL;
 	mlx_clear_window(t->mlx, t->win);
 	mlx_destroy_window(t->mlx, t->win);
 	free(t);
+	t = NULL;
+	system("killall afplay 2&>/dev/null >/dev/null");
 	exit(1);
 	return (0);
 }
@@ -42,6 +44,7 @@ int		error_printf(t_cub3d *t)
 	return (0);
 }
 
+// Need refactoring
 void sort_sprites(int* order, double* dist, int amount)
 {
 	int gap;
@@ -49,7 +52,7 @@ void sort_sprites(int* order, double* dist, int amount)
 
 	gap = amount;
 	swapped = 0;
-	while(gap > 1 || swapped)
+	while (gap > 1 || swapped)
 	{
 		gap = (gap * 10) / 13;
 		if(gap == 9 || gap == 10)

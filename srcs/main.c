@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:26:49 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/04 16:49:06 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/04 16:56:54 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 static int		cub3d(t_cub3d *t)
 {
-	t->ms = 0.05;
-	t->rs = 0.05;
 	t->lenline = -1;
 	t->player->shooting = 0;
 	t->player->fr = 17;

@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:25:35 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/03 23:02:25 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/04 16:56:46 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@
 # define WALL_S				0x32a852
 # define WALL_W				0x38dbe0
 # define AO					0x000000
-# define D					(double)
 # define FOV				0.66
+# define MS					0.05
+# define RS					0.05
 
 typedef union
 {
@@ -137,8 +138,6 @@ typedef struct				s_cub3d
 	double					walldist;
 	double					x_olddir;
 	double					x_oldplane;
-	double					ms;
-	double					rs;
 	double					x_wall;
 	double					x_floor;
 	double					y_floor;
