@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:25:35 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/03 17:53:29 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/03 23:02:25 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ typedef struct				s_option_parser
 /*
 ** Util's functions
 */
-int							error_printf();
+int							error_printf(t_cub3d *t);
 int							exit_program(t_cub3d *t);
 void						fps(t_cub3d *e);
 void						sort_sprites(int* order, double* dist, int amount);

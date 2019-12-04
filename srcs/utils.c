@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:32:01 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/29 20:42:10 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/04 13:50:20 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,16 @@ int		exit_program(t_cub3d *t)
 {
 	int i;
 
-	printf("Closing...\n");
 	i = 0;
-	while (i < t->nb_lines)
-		free(t->map[i++]);
-	free(t->map);
-	free(t->sprites);
-	t->map = NULL;
+	if (t->map)
+	{
+		while (i < t->nb_lines)
+			free(t->map[i++]);
+		free(t->map);
+		t->map = NULL;
+	}
+	if (t->sprites)
+		free(t->sprites);
 	system("killall afplay 2&>/dev/null >/dev/null");
 	mlx_clear_window(t->mlx, t->win);
 	mlx_destroy_window(t->mlx, t->win);
@@ -31,8 +34,10 @@ int		exit_program(t_cub3d *t)
 	return (0);
 }
 
-int		error_printf()
+int		error_printf(t_cub3d *t)
 {
+	if (t)
+		exit_program(t);
 	ft_putendl_fd("Error", STDOUT_FILENO);
 	return (0);
 }
