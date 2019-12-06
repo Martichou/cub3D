@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:25:35 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/04 16:56:46 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/06 15:28:54 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@
 # define FOV				0.66
 # define MS					0.05
 # define RS					0.05
+# ifndef M_PI
+#  define M_PI				3.14
+# endif
 
 typedef union
 {
@@ -198,6 +201,7 @@ int							setup_barrel(t_cub3d *t);
 /*
 ** AO
 */
+int							ft_add_ao(int clr, double percent);
 int							ft_gt_colors(int clr1, int clr2, double val);
 int							ft_shade_color(int clr, double val);
 

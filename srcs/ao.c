@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 14:30:54 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/04 16:56:09 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/06 15:00:20 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,23 @@ int			ft_shade_color(int clr, double val)
 	b = floor((double)((clr) & 0xFF) +
 		(double)((0.0 - (double)((clr) & 0xFF)) * val));
 	return (((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff));
+}
+
+int			ft_add_ao(int clr, double percent)
+{
+	double	intensity;
+
+	if (percent >= 0. && percent <= 10.)
+	{
+		intensity = ((1.4 / (((percent * 25.) / 100.) + 1.)) - 0.4);
+		intensity /= 5.;
+		clr = ft_shade_color(clr, intensity);
+	}
+	else if (percent >= 90. && percent <= 100. && (percent -= 90.) != -1)
+	{
+		intensity = ((1.4 / (-((percent * 25.) / 100.) + 3.5)) - 0.4);
+		intensity /= 5.;
+		clr = ft_shade_color(clr, intensity);
+	}
+	return (clr);
 }

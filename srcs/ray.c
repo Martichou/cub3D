@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:47:52 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/03 17:30:44 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/06 15:43:27 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,32 +38,22 @@ static void	dda(t_cub3d *t)
 			t->x_sidedist += t->x_deltadist;
 			t->x_map += t->x_step;
 			if (t->x_pos > t->x_map)
-			{
 				t->side = 0;
-				t->color = WALL_N;
-			}
 			else
-			{
 				t->side = 1;
-				t->color = WALL_S;
-			}
-			t->color = ft_gt_colors(t->color, AO, ((t->x_sidedist / 7) / ((4. - (2. * (float)(1))) - 0.4)));
+			t->color = ft_gt_colors((t->side == 0) ? WALL_N : WALL_S, AO,
+				((t->walldist / 4) / ((4. - (2. * (float)(1))) - 0.4)));
 		}
 		else
 		{
 			t->y_sidedist += t->y_deltadist;
 			t->y_map += t->y_step;
 			if (t->y_pos > t->y_map)
-			{
 				t->side = 2;
-				t->color = WALL_W;
-			}
 			else
-			{
 				t->side = 3;
-				t->color = WALL_E;
-			}
-			t->color = ft_gt_colors(t->color, AO, ((t->y_sidedist / 7) / ((4. - (2. * (float)(1))) - 0.4)));
+			t->color = ft_gt_colors((t->side == 2) ? WALL_W : WALL_E, AO,
+				((t->walldist / 4) / ((4. - (2. * (float)(1))) - 0.4)));
 		}
 		if (t->map[t->x_map][t->y_map] == 1)
 			t->hit = 1;
@@ -104,7 +94,6 @@ static void	floor_and_ceiling(t_cub3d *t, int x)
 	}
 	if (t->end > 0)
 	{
-
 		t->color = t->floor_color.hexcode;
 		t->y = t->end - 1;
 		if (x < t->window_width && t->y < t->window_height)

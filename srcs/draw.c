@@ -6,13 +6,13 @@
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:51:23 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/03 16:48:45 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/06 15:44:41 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-static void	put_pxl_to_img(t_cub3d *t, int x, int y, int color)
+static void	put_pxl_to_img(t_cub3d *t, int x, int y)
 {
 	if (t->texture == 1 && x < t->window_width && y < t->window_height)
 	{
@@ -23,7 +23,10 @@ static void	put_pxl_to_img(t_cub3d *t, int x, int y, int color)
 				t->x_text % 64 * t->tex[t->id].bpp / 8], sizeof(int));
 	}
 	else if (x < t->window_width && y < t->window_height)
-		ft_memcpy(t->img_ptr + 4 * t->window_width * y + x * 4, &color, sizeof(int));
+	{
+		t->color = ft_add_ao(t->color, ((y - t->min) * 100. / (t->max - t->min)));
+		ft_memcpy(t->img_ptr + 4 * t->window_width * y + x * 4, &t->color, sizeof(int));
+	}
 }
 
 void		draw_wall(int x, int start, int end, t_cub3d *t)
@@ -39,7 +42,7 @@ void		draw_wall(int x, int start, int end, t_cub3d *t)
 		t->x_text = abs(t->x_text);
 	}
 	while (++start <= end)
-		put_pxl_to_img(t, x, start, t->color);
+		put_pxl_to_img(t, x, start);
 }
 
 void	draw_sky(t_cub3d *t)
