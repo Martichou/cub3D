@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bmp.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 18:39:55 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/29 18:55:12 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/06 14:55:34 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,10 @@ int save_bmp(t_cub3d *t)
 
 	pad = (4 - ((int)t->window_width * 3) % 4) % 4;
 	filesize = 54 + (3 * ((int)t->window_width + pad) * (int)t->window_height);
-	if ((file = open("screenshot.bmp", O_WRONLY | O_CREAT | O_TRUNC | O_APPEND)) < 0)
+	if ((file =
+		open("screen.bmp", O_WRONLY | O_CREAT | O_TRUNC | O_APPEND)) < 0)
 		return (0);
-	if (!write_header(file, filesize, t))
-		return (0);
-	if (!write_data(file, t, pad))
+	if (!write_header(file, filesize, t) || !write_data(file, t, pad))
 		return (0);
 	close(file);
 	return (1);

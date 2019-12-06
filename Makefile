@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marandre <marandre@student.42.fr>          +#+  +:+       +#+         #
+#    By: marandre <marandre@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/21 20:24:19 by marandre          #+#    #+#              #
-#    Updated: 2019/11/29 18:49:26 by marandre         ###   ########.fr        #
+#    Updated: 2019/12/06 14:54:15 by marandre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,8 +36,8 @@ OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 all: libft minilibx_all $(NAME)
 
 $(NAME): $(OBJ) libft/libft.a
-	@rm -rf screenshot.bmp
-	@echo "" > screenshot.bmp
+	@rm -rf screen.bmp
+	@echo "" > screen.bmp
 	@$(CC) $(LDFLAGS) $(LDLIBS) $^ -o $@
 	@echo "Compilation of cub3D:	\033[1;32mOK\033[m"
 
