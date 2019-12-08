@@ -6,7 +6,7 @@
 #    By: marandre <marandre@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/21 20:24:19 by marandre          #+#    #+#              #
-#    Updated: 2019/12/08 17:47:19 by marandre         ###   ########.fr        #
+#    Updated: 2019/12/08 17:48:47 by marandre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,18 +50,19 @@ libft:
 
 clean:
 	@make -C libft clean
+	@make -C minilibx_opengl clean
+	@make -C minilibx_swift clean
 	@rm -f $(OBJ)
 	@rmdir $(OBJ_PATH) 2> /dev/null || true
-	@echo "cub3D:	Removing Objs"
 
 fclean:
 	@rm -rf screenshot.bmp
 	@make -C libft fclean
+	@make -C minilibx_opengl clean
+	@make -C minilibx_swift clean
 	@rm -f $(OBJ)
 	@rmdir $(OBJ_PATH) 2> /dev/null || true
-	@echo "cub3D:	Removing Objs"
 	@rm -f $(NAME)
-	@echo "cub3D:	Removing cub3D"
 
 re: fclean all
 
