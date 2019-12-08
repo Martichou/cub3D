@@ -1,2 +1,5 @@
 .vscode/
 cub3D
+*.a
+*.o
+*.bmp
