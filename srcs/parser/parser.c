@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 20:36:16 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/03 17:23:09 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/09 16:19:17 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,45 @@ static t_option_parser	option_parsers[] =
 	{"X", parse_sprite_texture_11, 1},
 	{"F", parse_floor_color, 1},
 	{"C", parse_ceilling_color, 1},
-	{"1", parse_map, 0}
+	{"1", parse_map, 0},
+	{"0", parse_map, 0}
 };
 
 #define OPTIONS_PARSERS_SIZE (sizeof(option_parsers) / sizeof(t_option_parser))
 
 static int parse_line(t_cub3d *t, char *line)
 {
+	static int map;
 	int i;
 
-	if (!*line)
+	if (!map)
+		map = 0;
+	if (!*line && !map)
 		return (1);
+	else if (!*line && map)
+	{
+		t->nb_lines = map;
+		return (0);
+	}
 	i = -1;
 	while (++i < (int)OPTIONS_PARSERS_SIZE)
+	{
 		if (ft_strncmp(option_parsers[i].id, line, ft_strlen(option_parsers[i].id)) == 0)
-			return (option_parsers[i].func(t, line + option_parsers[i].to_skip));
+		{
+			if (*line == '1')
+			{
+				map = option_parsers[i].func(t, line + option_parsers[i].to_skip);
+				if (map == -1)
+				{
+					map = 0;
+					return (1);
+				}
+				return (map);
+			}
+			else
+				return(option_parsers[i].func(t, line + option_parsers[i].to_skip));
+		}
+	}
 	return (0);
 }
 
@@ -99,7 +123,11 @@ int     parse(t_cub3d *t, char *filename)
 		if (!parse_line(t, line))
 			return (0);
 		free(line);
+		line = NULL;
 	}
+	if (!parse_line(t, line))
+		return (0);
+	free(line);
 	close(fd);
 	if (ret == -1)
 		return (0);

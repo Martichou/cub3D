@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:26:49 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/04 16:56:54 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/09 11:38:35 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int				main(int ac, char **av)
 	if (ac < 2)
 		return (error_printf(NULL));
 	if (!(t = ft_calloc(sizeof(t_cub3d), 1)) 
-		|| !(t->player = ft_calloc(sizeof(t_player), 1))
+		|| (!(t->player = ft_calloc(sizeof(t_player), 1)))
 		|| ft_strchr_at_end(av[1], ".cub") == -1)
 		return (error_printf(t));
 	if (ac > 2)

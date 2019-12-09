@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 21:01:10 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/03 17:30:52 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/09 16:44:12 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
+
+static int	exit_parse_map(t_cub3d *t, int i)
+{
+	t->nb_lines = i;
+	return (0);
+}
 
 static int	ft_linelen(const char *s)
 {
@@ -26,36 +32,34 @@ static int	ft_linelen(const char *s)
 	return (count + 1 / 2);
 }
 
-int	parse_map(t_cub3d *t, char *line)
+int			parse_map(t_cub3d *t, char *line)
 {
+	static int sp;
 	static int i;
 	int j;
 	int k;
-	static int sp;
 
 	if (!i)
 		i = 0;
 	k = 0;
-	if (t->lenline != -1)
+	if (!t->lenline)
 		t->lenline = ft_linelen(line);
 	else if (t->lenline != ft_linelen(line))
-		return (0);
+		return (exit_parse_map(t, i));
 	if (!(t->map[i] = (int *)malloc(sizeof(int) * t->lenline)))
-		return (0);
+		return (exit_parse_map(t, i));
 	j = -1;
 	if (!sp)
 		sp = t->sprites_number;
 	while (++j < t->lenline)
 	{
-		if (line[k] == ' ')
+		while (line[k] == ' ')
 			k++;
-		if (line[k] == 'N' || line[k] == 'E'
+		if (k == 0 && line[k] != '1')
+			return (exit_parse_map(t, i));
+		else if (line[k] == 'N' || line[k] == 'E'
 			|| line[k] == 'S' || line[k] == 'W')
 		{
-			// N = -1	S = 1		E = 0.		W = 0.
-			// N = 0.	S = 0.		E = 1.		W = -1.
-			// N = 0.	S = 0.		E = FOV		W = -FOV
-			// N = FOV	S = -FOV	E = 0.		W = 0.
 			if (line[k] == 'N')
 			{
 				t->x_dir = -1;
@@ -88,7 +92,7 @@ int	parse_map(t_cub3d *t, char *line)
 			t->y_pos = j;
 			t->map[i][j] = 0;
 		}
-		else
+		else if (line[k] == '0' || line[k] == '1' || line[k] == '2' || line[k] == '3')
 		{
 			t->map[i][j] = ft_atoi(&line[k]);
 			if (t->map[i][j] == 2 || t->map[i][j] == 3)
@@ -107,8 +111,12 @@ int	parse_map(t_cub3d *t, char *line)
 				}
 			}
 		}
+		else
+			return (exit_parse_map(t, i));
 		k++;
 	}
 	i++;
-	return (1);
+	if (i == t->nb_lines)
+		return (-1);
+	return (i);
 }

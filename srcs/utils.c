@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:32:01 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/04 16:53:48 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/09 13:17:16 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,11 @@ int		exit_program(t_cub3d *t)
 	t->zbuffer = NULL;
 	free(t->player);
 	t->player = NULL;
-	mlx_clear_window(t->mlx, t->win);
-	mlx_destroy_window(t->mlx, t->win);
+	if (t->mlx && t->win)
+	{
+		mlx_clear_window(t->mlx, t->win);
+		mlx_destroy_window(t->mlx, t->win);
+	}
 	free(t);
 	t = NULL;
 	system("killall afplay 2&>/dev/null >/dev/null");
@@ -38,9 +41,9 @@ int		exit_program(t_cub3d *t)
 
 int		error_printf(t_cub3d *t)
 {
+	ft_putendl_fd("Error", STDOUT_FILENO);
 	if (t)
 		exit_program(t);
-	ft_putendl_fd("Error", STDOUT_FILENO);
 	return (0);
 }
 
