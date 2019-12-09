@@ -3,23 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   fps.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 14:42:06 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/03 17:56:53 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/09 18:18:02 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-void	fps(t_cub3d *t)
+static void	put_hud(t_cub3d *t)
+{
+	int	i;
+
+	i = 0;
+	while (i++ < t->player->life)
+		mlx_string_put(t->mlx, t->win, 10 + i,
+			t->window_height - 10, 0xFF0000, "|");
+	while (i++ < 100)
+		mlx_string_put(t->mlx, t->win, 10 + i,
+			t->window_height - 10, 0x808080, "|");
+	mlx_string_put(t->mlx, t->win, 15,
+		t->window_height - 30, 0xffffff, "Collected   / ");
+	mlx_string_put(t->mlx, t->win, 90,
+		t->window_height - 30, 0xffffff, ft_itoa(t->player->chest_collected));
+	mlx_string_put(t->mlx, t->win, 108,
+		t->window_height - 30, 0xffffff, ft_itoa(t->player->chest_to_collect));
+	mlx_string_put(t->mlx, t->win, t->window_width - 30,
+		t->window_height - 10, 0xffffff, ft_itoa(t->player->bullets));
+	mlx_string_put(t->mlx, t->win,
+		t->window_width - 30, t->window_height - 10, 0xffffff, " /8");
+	mlx_string_put(t->mlx, t->win,
+		t->window_width / 2, t->window_height / 2 + 15, 0xffffff, ".");
+}
+
+void		fps(t_cub3d *t)
 {
 	static int		timestamp;
 	static int		fps;
 	static int		fps_2;
-	int i;
 
-	i = 0;
 	if (time(NULL) != timestamp)
 	{
 		fps_2 = fps;
@@ -29,16 +52,7 @@ void	fps(t_cub3d *t)
 	else
 		fps++;
 	mlx_string_put(t->mlx, t->win, 10, 20, 0xffffff, t->player->name);
-	mlx_string_put(t->mlx, t->win, t->window_width - 20, 20, 0xe5e500, ft_itoa(fps_2 + 1));
-	while (i++ < t->player->life)
-		mlx_string_put(t->mlx, t->win, 10 + i, t->window_height - 10, 0xFF0000, "|");
-	while (i++ < 100)
-		mlx_string_put(t->mlx, t->win, 10 + i, t->window_height - 10, 0x808080, "|");
-	mlx_string_put(t->mlx, t->win, 15, t->window_height - 30, 0xffffff, "Collected");
-	mlx_string_put(t->mlx, t->win, 90, t->window_height - 30, 0xffffff, ft_itoa(t->player->chest_collected));
-	mlx_string_put(t->mlx, t->win, 93, t->window_height - 30, 0xffffff, " / ");
-	mlx_string_put(t->mlx, t->win, 108, t->window_height - 30, 0xffffff, ft_itoa(t->player->chest_to_collect));
-	mlx_string_put(t->mlx, t->win, t->window_width - 30, t->window_height - 10, 0xffffff, ft_itoa(t->player->bullets));
-	mlx_string_put(t->mlx, t->win, t->window_width - 30, t->window_height - 10, 0xffffff, " /8");
-	mlx_string_put(t->mlx, t->win, t->window_width / 2, t->window_height / 2 + 15, 0xffffff, ".");
+	mlx_string_put(t->mlx, t->win, t->window_width - 20,
+		20, 0xe5e500, ft_itoa(fps_2 + 1));
+	put_hud(t);
 }

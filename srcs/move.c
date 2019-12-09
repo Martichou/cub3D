@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:43:04 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/09 17:12:31 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/09 18:21:05 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,6 @@ static void	check_goal(t_cub3d *t)
 		if (t->player->chest_collected == t->player->chest_to_collect)
 			t->player->ended = 1;
 		t->map[(int)t->x_pos][(int)t->y_pos] = 0;
-		// Maybe change texture of the chest to an open chest
-		// Pass spritesOrder as global and spritesDistances
-		// Then the closest sprites is the sprites we're on
-		// We can check that by comparing the x and y value
 	}
 }
 
@@ -82,10 +78,10 @@ static void	move_ud(t_cub3d *t)
 			t->x_pos -= t->x_dir * MS;
 		if (t->map[(int)(t->x_pos)][(int)(t->y_pos - t->y_dir * MS)] != 1)
 			t->y_pos -= t->y_dir * MS;
-	}	
+	}
 }
 
-int		move(t_cub3d *t)
+int			move(t_cub3d *t)
 {
 	move_ud(t);
 	move_lr(t);

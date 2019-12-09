@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:25:35 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/06 15:28:54 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/10 14:09:02 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -36,6 +34,9 @@
 # ifndef M_PI
 #  define M_PI				3.14
 # endif
+# define UDIV				2
+# define VDIV				2
+# define VMOVE				194.0
 
 typedef union
 {
@@ -63,6 +64,29 @@ typedef struct				s_sprites
 	int						y;
 	int						tex_index;
 }							t_sprites;
+
+typedef struct				s_sprites_work
+{
+	double					sp_x;
+	double					sp_y;
+	double					inv_det;
+	double					transform_x;
+	double					transform_y;
+	int						sp_screen_x;
+	int						vms;
+	int						sp_height;
+	int						draw_start_y;
+	int						draw_end_y;
+	int						sp_width;
+	int						draw_start_x;
+	int						draw_end_x;
+	int						stripe;
+	int						tex_x;
+	int						y;
+	int						d;
+	int						tex_y;
+	int						color;
+}							t_sprites_work;
 
 typedef struct				s_player
 {
@@ -122,7 +146,7 @@ typedef struct				s_cub3d
 	int						y;
 	int						min;
 	int						max;
-	double					*zbuffer; // walldist for each vertical lines
+	double					*zbuffer;
 	double					x_pos;
 	double					y_pos;
 	double					x_dir;
@@ -162,7 +186,7 @@ typedef struct				s_option_parser
 int							error_printf(t_cub3d *t);
 int							exit_program(t_cub3d *t);
 void						fps(t_cub3d *e);
-void						sort_sprites(int* order, double* dist, int amount);
+void						sort_sprites(int *order, double *dist, int amount);
 int							save_bmp(t_cub3d *t);
 
 /*
@@ -179,6 +203,13 @@ void						ray(t_cub3d *t);
 void						draw_wall(int x, int start, int end, t_cub3d *t);
 void						draw_sky(t_cub3d *t);
 void						draw_gun(t_cub3d *t);
+int							draw_sprites(t_cub3d *t);
+
+/*
+** DDA functions
+*/
+void						dda_init(t_cub3d *t);
+void						dda(t_cub3d *t);
 
 /*
 ** Parsing functions
@@ -195,13 +226,12 @@ int							parse_ceilling_color(t_cub3d *t, char *line);
 int							parse_sprite_texture_10(t_cub3d *t, char *line);
 int							parse_sprite_texture_11(t_cub3d *t, char *line);
 int							setup_sky(t_cub3d *t);
-int							setup_shotgun(t_cub3d *t);
 int							setup_barrel(t_cub3d *t);
 
 /*
 ** AO
 */
-int							ft_add_ao(int clr, double percent);
+int							ft_ao(int clr, double percent);
 int							ft_gt_colors(int clr1, int clr2, double val);
 int							ft_shade_color(int clr, double val);
 

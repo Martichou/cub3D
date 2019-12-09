@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:26:49 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/09 17:39:32 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/09 18:20:19 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ static int		cub3d(t_cub3d *t)
 	return (1);
 }
 
-static int mouse_hook(t_cub3d *t)
+static int		mouse_hook(t_cub3d *t)
 {
 	(void)t;
 	return (0);
 }
 
-static int	check_val(t_cub3d *t)
+static int		check_val(t_cub3d *t)
 {
 	if (t->window_width == 0 || t->window_height == 0)
 		return (0);
@@ -44,16 +44,8 @@ static int	check_val(t_cub3d *t)
 	return (1);
 }
 
-int				main(int ac, char **av)
+static void		check_name_save(int ac, char **av, t_cub3d *t)
 {
-	t_cub3d *t;
-	(void)av;
-	if (ac < 2)
-		return (error_printf(NULL));
-	if (!(t = ft_calloc(sizeof(t_cub3d), 1)) 
-		|| (!(t->player = ft_calloc(sizeof(t_player), 1)))
-		|| ft_strchr_at_end(av[1], ".cub") == -1)
-		return (error_printf(t));
 	if (ac > 2)
 	{
 		if (ft_strncmp(av[2], "--save", ft_strlen(av[2])) == 0)
@@ -66,6 +58,19 @@ int				main(int ac, char **av)
 	}
 	else
 		t->player->name = av[0];
+}
+
+int				main(int ac, char **av)
+{
+	t_cub3d *t;
+
+	if (ac < 2)
+		return (error_printf(NULL));
+	if (!(t = ft_calloc(sizeof(t_cub3d), 1))
+		|| (!(t->player = ft_calloc(sizeof(t_player), 1)))
+		|| ft_strchr_at_end(av[1], ".cub") == -1)
+		return (error_printf(t));
+	check_name_save(ac, av, t);
 	t->mlx = mlx_init();
 	if (!(parse(t, av[1])))
 		return (error_printf(t));

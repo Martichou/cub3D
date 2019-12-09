@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   bmp.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 18:39:55 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/06 14:55:34 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/09 18:08:46 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-static void int_as_char(unsigned char *start, int value)
+static void	int_as_char(unsigned char *start, int value)
 {
 	start[0] = (unsigned char)(value);
 	start[1] = (unsigned char)(value >> 8);
@@ -20,7 +20,7 @@ static void int_as_char(unsigned char *start, int value)
 	start[3] = (unsigned char)(value >> 24);
 }
 
-static int write_header(int fd, int filesize, t_cub3d *t)
+static int	write_header(int fd, int filesize, t_cub3d *t)
 {
 	unsigned char	*bmpfileheader;
 
@@ -37,16 +37,16 @@ static int write_header(int fd, int filesize, t_cub3d *t)
 	return (!(write(fd, bmpfileheader, 54) < 0));
 }
 
-static int get_color(t_cub3d *t, int x, int y)
+static int	get_color(t_cub3d *t, int x, int y)
 {
 	int	color;
 
 	color = *(int*)(t->img_ptr + (4 * (int)t->window_width *
-        ((int)t->window_height - 1 - y)) + (4 * x));
+		((int)t->window_height - 1 - y)) + (4 * x));
 	return ((color & 0xFF0000) | (color & 0x00FF00) | (color & 0x0000FF));
 }
 
-static int write_data(int file, t_cub3d *t, int pad)
+static int	write_data(int file, t_cub3d *t, int pad)
 {
 	const unsigned char	zero[3] = {0, 0, 0};
 	int					i;
@@ -71,7 +71,7 @@ static int write_data(int file, t_cub3d *t, int pad)
 	return (1);
 }
 
-int save_bmp(t_cub3d *t)
+int			save_bmp(t_cub3d *t)
 {
 	int			filesize;
 	int			file;

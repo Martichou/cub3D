@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_resolution.c                                 :+:      :+:    :+:   */
+/*   ft_linelen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/25 20:46:38 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/09 21:11:09 by marandre         ###   ########.fr       */
+/*   Created: 2019/12/10 13:52:02 by marandre          #+#    #+#             */
+/*   Updated: 2019/12/10 13:53:14 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include "libft.h"
 
-int		parse_resolution(t_cub3d *t, char *line)
+int	ft_linelen(const char *s)
 {
-	t->window_width = ft_atoi(line);
-	line = ft_strrchr(line, ' ') + 1;
-	t->window_height = ft_atoi(line);
-	if (t->window_width > 1920)
-		t->window_width = 1920;
-	if (t->window_height > 1080)
-		t->window_height = 1080;
-	if (t->window_width < 848)
-		t->window_width = 848;
-	if (t->window_height < 480)
-		t->window_height = 480;
-	return (1);
+	int	count;
+
+	count = 0;
+	while (*s)
+	{
+		if (*s != ' ' && *s != '\n')
+			count++;
+		s++;
+	}
+	return (count);
 }

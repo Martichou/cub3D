@@ -6,13 +6,13 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 20:36:16 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/09 17:59:47 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/10 12:10:07 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-static t_option_parser	option_parsers[] =
+static t_option_parser	g_opt_p[] =
 {
 	{"R", parse_resolution, 1},
 	{"NO", parse_north_texture, 2},
@@ -27,45 +27,61 @@ static t_option_parser	option_parsers[] =
 	{"0", parse_map, 0}
 };
 
-#define OPTIONS_PARSERS_SIZE (sizeof(option_parsers) / sizeof(t_option_parser))
+#define OPTIONS_PARSERS_SIZE (sizeof(g_opt_p) / sizeof(t_option_parser))
 
-static int parse_line(t_cub3d *t, char *line)
+static int				setup_shotgun(t_cub3d *t)
 {
-	static int map;
-	int i;
+	int		a;
+	int		b;
 
-	if (!map)
-		map = 0;
+	a = 64;
+	b = 64;
+	t->tex[5].img = mlx_xpm_file_to_image(t->mlx, "textures/gun.xpm", &a, &b);
+	t->tex[5].data = mlx_get_data_addr(t->tex[5].img, &t->tex[5].bpp,
+			&t->tex[5].sizeline, &t->tex[5].endian);
+	t->tex[6].img = mlx_xpm_file_to_image(t->mlx, "textures/gun2.xpm", &a, &b);
+	t->tex[6].data = mlx_get_data_addr(t->tex[6].img, &t->tex[6].bpp,
+			&t->tex[6].sizeline, &t->tex[6].endian);
+	t->tex[7].img = mlx_xpm_file_to_image(t->mlx, "textures/gun3.xpm", &a, &b);
+	t->tex[7].data = mlx_get_data_addr(t->tex[7].img, &t->tex[7].bpp,
+			&t->tex[7].sizeline, &t->tex[7].endian);
+	t->tex[8].img = mlx_xpm_file_to_image(t->mlx, "textures/gun4.xpm", &a, &b);
+	t->tex[8].data = mlx_get_data_addr(t->tex[8].img, &t->tex[8].bpp,
+			&t->tex[8].sizeline, &t->tex[8].endian);
+	t->tex[9].img = mlx_xpm_file_to_image(t->mlx, "textures/gun5.xpm", &a, &b);
+	t->tex[9].data = mlx_get_data_addr(t->tex[9].img, &t->tex[9].bpp,
+			&t->tex[9].sizeline, &t->tex[9].endian);
+	return (1);
+}
+
+static int				parse_line(t_cub3d *t, char *line)
+{
+	static int	map;
+	int			i;
+
+	map = !!map * map;
 	if (!*line && !map)
 		return (1);
 	else if (!*line && map)
-	{
-		t->nb_lines = map;
-		return (0);
-	}
+		return ((t->nb_lines = map) & 0);
 	i = -1;
 	while (++i < (int)OPTIONS_PARSERS_SIZE)
-	{
-		if (ft_strncmp(option_parsers[i].id, line, ft_strlen(option_parsers[i].id)) == 0)
+		if (ft_strncmp(g_opt_p[i].id, line, ft_strlen(g_opt_p[i].id)) == 0)
 		{
 			if (*line == '1')
 			{
-				map = option_parsers[i].func(t, line + option_parsers[i].to_skip);
+				map = g_opt_p[i].func(t, line + g_opt_p[i].to_skip);
 				if (map == -1)
-				{
-					map = 0;
-					return (1);
-				}
+					return ((map = 0) + 1);
 				return (map);
 			}
 			else
-				return(option_parsers[i].func(t, line + option_parsers[i].to_skip));
+				return (g_opt_p[i].func(t, line + g_opt_p[i].to_skip));
 		}
-	}
 	return (0);
 }
 
-static int	count_sprites(char *line)
+static int				count_sprites(char *line)
 {
 	int i;
 
@@ -79,12 +95,12 @@ static int	count_sprites(char *line)
 	return (i);
 }
 
-static int	setup_map(t_cub3d *t, char *filename)
+static int				setup_map(t_cub3d *t, char *filename)
 {
 	int		fd;
 	int		ret;
 	char	*line;
-	
+
 	if ((fd = open(filename, O_RDONLY)) < 0)
 		return (0);
 	while ((ret = get_next_line(fd, &line)) > 0)
@@ -103,15 +119,12 @@ static int	setup_map(t_cub3d *t, char *filename)
 	}
 	free(line);
 	close(fd);
-	if (ret == -1)
-		return (0);
-	if (!(t->map = (int **)malloc(sizeof(int *) * t->nb_lines))
-		|| !(t->sprites = malloc(sizeof(t_sprites) * t->sprites_number)))
-		return (0);
-	return(1);
+	return (!(ret == -1 || (!(t->map = (int **)malloc(sizeof(int *) *
+		t->nb_lines)) || !(t->sprites = malloc(sizeof(t_sprites) *
+		t->sprites_number)))));
 }
 
-int     parse(t_cub3d *t, char *filename)
+int						parse(t_cub3d *t, char *filename)
 {
 	int		fd;
 	int		ret;
@@ -120,9 +133,7 @@ int     parse(t_cub3d *t, char *filename)
 	t->map = NULL;
 	t->ceilling_color.hexcode = 0;
 	t->floor_color.hexcode = 0;
-	if (!setup_map(t, filename))
-		return (0);
-	if ((fd = open(filename, O_RDONLY)) < 0)
+	if (!setup_map(t, filename) || (fd = open(filename, O_RDONLY)) < 0)
 		return (0);
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{

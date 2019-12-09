@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:51:23 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/06 15:44:41 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/09 18:11:15 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ static void	put_pxl_to_img(t_cub3d *t, int x, int y)
 	}
 	else if (x < t->window_width && y < t->window_height)
 	{
-		t->color = ft_add_ao(t->color, ((y - t->min) * 100. / (t->max - t->min)));
-		ft_memcpy(t->img_ptr + 4 * t->window_width * y + x * 4, &t->color, sizeof(int));
+		t->color = ft_ao(t->color, ((y - t->min) * 100 / (t->max - t->min)));
+		ft_memcpy(t->img_ptr + 4 * t->window_width * y + x * 4,
+			&t->color, sizeof(int));
 	}
 }
 
@@ -45,7 +46,7 @@ void		draw_wall(int x, int start, int end, t_cub3d *t)
 		put_pxl_to_img(t, x, start);
 }
 
-void	draw_sky(t_cub3d *t)
+void		draw_sky(t_cub3d *t)
 {
 	t->x_text = 0;
 	while (t->x_text < t->window_width)
@@ -53,22 +54,25 @@ void	draw_sky(t_cub3d *t)
 		t->y_text = 0;
 		while (t->y_text < t->window_height / 2)
 		{
-			ft_memcpy(t->img_ptr + 4 * t->window_width * t->y_text + t->x_text * 4,
-					&t->tex[4].data[t->y_text % 512 * t->tex[4].sizeline +
-					t->x_text % 512 * t->tex[4].bpp / 8], sizeof(int));
+			ft_memcpy(t->img_ptr + 4 * t->window_width * t->y_text +
+					t->x_text * 4, &t->tex[4].data[t->y_text % 512 *
+					t->tex[4].sizeline + t->x_text % 512 *
+					t->tex[4].bpp / 8], sizeof(int));
 			t->y_text++;
 		}
 		t->x_text++;
 	}
 }
 
-static void		animate_shotgun(t_cub3d *t, int posx, int posy)
+static void	animate_shotgun(t_cub3d *t, int posx, int posy)
 {
 	if (t->player->fr >= 15 && t->player->reload == 0)
 		mlx_put_image_to_window(t->mlx, t->win, t->tex[6].img, posx, posy);
-	else if (t->player->fr >= 12 && t->player->fr <= 14 && t->player->reload == 0)
+	else if (t->player->fr >= 12 && t->player->fr <= 14
+		&& t->player->reload == 0)
 		mlx_put_image_to_window(t->mlx, t->win, t->tex[7].img, posx, posy);
-	else if (t->player->fr >= 10 && t->player->fr <= 11 && t->player->reload == 0)
+	else if (t->player->fr >= 10 && t->player->fr <= 11
+		&& t->player->reload == 0)
 		mlx_put_image_to_window(t->mlx, t->win, t->tex[8].img, posx, posy);
 	else if (t->player->fr >= 7 && t->player->fr <= 9 && t->player->reload == 0)
 		mlx_put_image_to_window(t->mlx, t->win, t->tex[9].img, posx, posy);
@@ -89,7 +93,7 @@ static void		animate_shotgun(t_cub3d *t, int posx, int posy)
 	}
 }
 
-void	draw_gun(t_cub3d *t)
+void		draw_gun(t_cub3d *t)
 {
 	int posx;
 	int posy;

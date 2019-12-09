@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 11:15:20 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/09 17:29:55 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/10 13:52:48 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,6 @@ int					get_next_line(int fd, char **line);
 int					ft_strchr_at_end(char *str, char *find);
 void				swap_double(double *xp, double *yp);
 void				swap_int(int *xp, int *yp);
+int					ft_linelen(const char *s);
 
 #endif

@@ -6,61 +6,13 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:47:52 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/09 17:15:41 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/09 18:41:33 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-static void	dda_init(t_cub3d *t)
-{
-	t->x_deltadist = sqrt(1 + (t->y_raydir * t->y_raydir)
-			/ (t->x_raydir * t->x_raydir));
-	t->y_deltadist = sqrt(1 + (t->x_raydir * t->x_raydir)
-			/ (t->y_raydir * t->y_raydir));
-	if (t->x_raydir < 0 && (t->x_step = -1))
-		t->x_sidedist = (t->x_raypos - t->x_map) * t->x_deltadist;
-	else if ((t->x_step = 1))
-		t->x_sidedist = (t->x_map + 1.0 - t->x_raypos) * t->x_deltadist;
-	if (t->y_raydir < 0 && (t->y_step = -1))
-		t->y_sidedist = (t->y_raypos - t->y_map) * t->y_deltadist;
-	else if ((t->y_step = 1))
-		t->y_sidedist = (t->y_map + 1.0 - t->y_raypos) * t->y_deltadist;
-}
-
-static void	dda(t_cub3d *t)
-{
-	t->hit = 0;
-	while (t->hit == 0)
-	{
-		if (t->x_sidedist < t->y_sidedist)
-		{
-			t->x_sidedist += t->x_deltadist;
-			t->x_map += t->x_step;
-			if (t->x_pos > t->x_map)
-				t->side = 0;
-			else
-				t->side = 1;
-			t->color = ft_gt_colors((t->side == 0) ? WALL_N : WALL_S, AO,
-				((t->walldist / 4) / ((4. - (2. * (float)(1))) - 0.4)));
-		}
-		else
-		{
-			t->y_sidedist += t->y_deltadist;
-			t->y_map += t->y_step;
-			if (t->y_pos > t->y_map)
-				t->side = 2;
-			else
-				t->side = 3;
-			t->color = ft_gt_colors((t->side == 2) ? WALL_W : WALL_E, AO,
-				((t->walldist / 4) / ((4. - (2. * (float)(1))) - 0.4)));
-		}
-		if (t->map[t->x_map][t->y_map] == 1)
-			t->hit = 1;
-	}
-}
-
-static void	ray_casting_init(t_cub3d *t, int x)
+static void		ray_casting_init(t_cub3d *t, int x)
 {
 	t->x_cam = 2 * x / (double)(t->window_width) - 1;
 	t->x_raypos = t->x_pos;
@@ -79,7 +31,7 @@ static void	ray_casting_init(t_cub3d *t, int x)
 				(1 - t->y_step) / 2) / t->y_raydir;
 }
 
-static void	floor_and_ceiling(t_cub3d *t, int x)
+static void		floor_and_ceiling(t_cub3d *t, int x)
 {
 	if (t->texture == 0)
 	{
@@ -89,7 +41,8 @@ static void	floor_and_ceiling(t_cub3d *t, int x)
 			t->y = -1;
 			if (x < t->window_width && t->y < t->window_height)
 				while (++t->y < t->start)
-					ft_memcpy(t->img_ptr + 4 * t->window_width * t->y + x * 4, &t->color, sizeof(int));
+					ft_memcpy(t->img_ptr + 4 * t->window_width *
+						t->y + x * 4, &t->color, sizeof(int));
 		}
 	}
 	if (t->end > 0)
@@ -98,80 +51,26 @@ static void	floor_and_ceiling(t_cub3d *t, int x)
 		t->y = t->end - 1;
 		if (x < t->window_width && t->y < t->window_height)
 			while (++t->y < t->window_height)
-				ft_memcpy(t->img_ptr + 4 * t->window_width * t->y + x * 4, &t->color, sizeof(int));
+				ft_memcpy(t->img_ptr + 4 * t->window_width *
+					t->y + x * 4, &t->color, sizeof(int));
 	}
 }
 
-static void	draw_sprites(t_cub3d *t)
+static void		sprites_and_put(t_cub3d *t)
 {
-	int spriteOrder[t->sprites_number];
-	double spriteDistance[t->sprites_number];
-	int i;
-	
-	i = 0;
-	while (i < t->sprites_number)
+	if (!draw_sprites(t))
+		error_printf(t);
+	if (t->is_save)
 	{
-		spriteOrder[i] = i;
-    	spriteDistance[i] = ((t->x_pos - t->sprites[i].x) * (t->x_pos - t->sprites[i].x) + (t->y_pos - t->sprites[i].y) * (t->y_pos - t->sprites[i].y));
-		i++;
+		save_bmp(t);
+		exit_program(t);
 	}
-	sort_sprites(spriteOrder, spriteDistance, t->sprites_number);
-
-	i = 0;
-	while (i < t->sprites_number)
-	{
-		//translate sprite position to relative to camera
-		//printf("order is %d\n i is %d\n X is %f\n Y is %f\n", spriteOrder[i], i, t->sprites[i].x, t->sprites[i].y);
-		double spriteX = t->sprites[spriteOrder[i]].x + 0.5 - t->x_pos;
-		double spriteY = t->sprites[spriteOrder[i]].y + 0.5 - t->y_pos;
-
-		double invDet = 1.0 / (t->x_plane * t->y_dir - t->x_dir * t->y_plane); //required for correct matrix multiplication
-
-		double transformX = invDet * (t->y_dir * spriteX - t->x_dir * spriteY);
-		double transformY = invDet * (-t->y_plane * spriteX + t->x_plane * spriteY); //this is actually the depth inside the screen, that what Z is in 3D
-
-		int spriteScreenX = (int)((t->window_width / 2) * (1 + transformX / transformY));
-
-		//parameters for scaling and moving the sprites
-		#define uDiv 2
-		#define vDiv 2
-		#define vMove 128.0
-		int vMoveScreen = (int)(vMove / transformY);
-
-		//calculate height of the sprite on screen
-		int spriteHeight = abs((int)(t->window_height / (transformY))) / vDiv; //using "transformY" instead of the real distance prevents fisheye
-		//calculate lowest and highest pixel to fill in current stripe
-		int drawStartY = -spriteHeight / 2 + t->window_height / 2 + vMoveScreen;
-		if(drawStartY < 0) drawStartY = 0;
-		int drawEndY = spriteHeight / 2 + t->window_height / 2 + vMoveScreen;
-		if(drawEndY >= t->window_height) drawEndY = t->window_height - 1;
-
-		//calculate width of the sprite
-		int spriteWidth = abs( (int) (t->window_height / (transformY))) / uDiv;
-		int drawStartX = -spriteWidth / 2 + spriteScreenX;
-		if(drawStartX < 0) drawStartX = 0;
-		int drawEndX = spriteWidth / 2 + spriteScreenX;
-		if(drawEndX >= t->window_width) drawEndX = t->window_width - 1;
-
-		//loop through every vertical stripe of the sprite on screen
-		for(int stripe = drawStartX; stripe < drawEndX; stripe++)
-		{
-			int texX = (int)(256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * 64 / spriteWidth) / 256;
-			if(transformY > 0 && stripe > 0 && stripe < t->window_width && transformY < t->zbuffer[stripe])
-				for(int y = drawStartY; y < drawEndY; y++) //for every pixel of the current stripe
-				{
-					int d = (y-vMoveScreen) * 256 - t->window_height * 128 + spriteHeight * 128;
-					int texY = ((d * 64) / spriteHeight) / 256;
-					int color = t->tex[t->sprites[spriteOrder[i]].tex_index].data[texY % 64 * t->tex[t->sprites[spriteOrder[i]].tex_index].sizeline + texX % 64 * t->tex[t->sprites[spriteOrder[i]].tex_index].bpp / 8];
-					if((color & 0x00FFFFFF) != 0)
-						ft_memcpy(t->img_ptr + 4 * t->window_width * y + stripe * 4, &t->tex[t->sprites[spriteOrder[i]].tex_index].data[texY % 64 * t->tex[t->sprites[spriteOrder[i]].tex_index].sizeline + texX % 64 * t->tex[t->sprites[spriteOrder[i]].tex_index].bpp / 8], sizeof(int));
-				}
-		}
-		i++;
-	}
+	else
+		mlx_put_image_to_window(t->mlx, t->win, t->img, 0, 0);
+	mlx_destroy_image(t->mlx, t->img);
 }
 
-void	ray(t_cub3d *t)
+void			ray(t_cub3d *t)
 {
 	t->x = -1;
 	t->img = mlx_new_image(t->mlx, t->window_width, t->window_height);
@@ -194,13 +93,5 @@ void	ray(t_cub3d *t)
 		draw_wall(t->x, t->start - 1, t->end, t);
 		floor_and_ceiling(t, t->x);
 	}
-	draw_sprites(t);
-	if (t->is_save)
-	{
-		save_bmp(t);
-		exit_program(t);
-	}
-	else
-		mlx_put_image_to_window(t->mlx, t->win, t->img, 0, 0);
-	mlx_destroy_image(t->mlx, t->img);
+	sprites_and_put(t);
 }

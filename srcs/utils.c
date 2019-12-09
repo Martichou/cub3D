@@ -6,13 +6,13 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:32:01 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/09 13:17:16 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/09 18:07:28 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-int		exit_program(t_cub3d *t)
+int			exit_program(t_cub3d *t)
 {
 	int i;
 
@@ -39,7 +39,7 @@ int		exit_program(t_cub3d *t)
 	return (0);
 }
 
-int		error_printf(t_cub3d *t)
+int			error_printf(t_cub3d *t)
 {
 	ft_putendl_fd("Error", STDOUT_FILENO);
 	if (t)
@@ -47,30 +47,30 @@ int		error_printf(t_cub3d *t)
 	return (0);
 }
 
-// Need refactoring
-void sort_sprites(int* order, double* dist, int amount)
+void		sort_sprites(int *order, double *dist, int amount)
 {
 	int gap;
 	int swapped;
+	int j;
+	int i;
 
 	gap = amount;
 	swapped = 0;
 	while (gap > 1 || swapped)
 	{
+		i = -1;
 		gap = (gap * 10) / 13;
-		if(gap == 9 || gap == 10)
+		if (gap == 9 || gap == 10)
 			gap = 11;
-		if (gap < 1)
-			gap = 1;
-		swapped = 0;
-		for (int i = 0; i < amount - gap; i++)
+		gap = (gap < 1) ? 1 : gap;
+		while (++i < amount - gap)
 		{
-			int j = i + gap;
+			j = i + gap;
 			if (dist[i] < dist[j])
 			{
 				swap_double(&dist[i], &dist[j]);
 				swap_int(&order[i], &order[j]);
-				swapped = 1;
+				return ;
 			}
 		}
 	}
