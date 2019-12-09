@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 21:01:10 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/09 16:44:12 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/09 17:30:34 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	ft_linelen(const char *s)
 			count++;
 		s++;
 	}
-	return (count + 1 / 2);
+	return (count);
 }
 
 int			parse_map(t_cub3d *t, char *line)
@@ -94,7 +94,7 @@ int			parse_map(t_cub3d *t, char *line)
 		}
 		else if (line[k] == '0' || line[k] == '1' || line[k] == '2' || line[k] == '3')
 		{
-			t->map[i][j] = ft_atoi(&line[k]);
+			t->map[i][j] = ft_natoi(&line[k], 1);
 			if (t->map[i][j] == 2 || t->map[i][j] == 3)
 			{
 				if (t->map[i][j] == 2)

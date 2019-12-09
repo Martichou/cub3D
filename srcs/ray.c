@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:47:52 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/06 15:43:27 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/09 17:15:41 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ static void	draw_sprites(t_cub3d *t)
 		//parameters for scaling and moving the sprites
 		#define uDiv 2
 		#define vDiv 2
-		#define vMove 192.0
+		#define vMove 128.0
 		int vMoveScreen = (int)(vMove / transformY);
 
 		//calculate height of the sprite on screen

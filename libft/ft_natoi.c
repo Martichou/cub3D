@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_natoi.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/07 09:25:48 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/09 17:29:32 by marandre         ###   ########.fr       */
+/*   Created: 2019/12/09 17:29:17 by marandre          #+#    #+#             */
+/*   Updated: 2019/12/09 17:29:57 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+int	ft_natoi(const char *str, int len)
 {
 	long	result;
 	int		i;
@@ -29,8 +29,9 @@ int	ft_atoi(const char *str)
 			sign = -1;
 		i++;
 	}
-	while (str[i] > 47 && str[i] < 58)
+	while (str[i] > 47 && str[i] < 58 && (len != -2 && len > 0))
 	{
+		--len;
 		if (10 * result + str[i] - 48 >= result)
 			result = 10 * result + str[i++] - 48;
 		else

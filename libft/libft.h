@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 11:15:20 by marandre          #+#    #+#             */
-/*   Updated: 2019/11/29 15:14:39 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/09 17:29:55 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int					ft_isprint(int c);
 int					ft_isascii(int c);
 int					ft_isalnum(int c);
 int					ft_atoi(const char *str);
+int					ft_natoi(const char *str, int len);
 char				*ft_strnstr(const char *haystack, const char *needle,
 						size_t len);
 char				*ft_strrchr(const char *str, int c);
