@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 21:01:10 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/09 17:30:34 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/09 17:57:23 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,13 @@ int			parse_map(t_cub3d *t, char *line)
 	static int sp;
 	static int i;
 	int j;
+	int space;
 	int k;
 
 	if (!i)
 		i = 0;
 	k = 0;
+	space = 0;
 	if (!t->lenline)
 		t->lenline = ft_linelen(line);
 	else if (t->lenline != ft_linelen(line))
@@ -51,10 +53,29 @@ int			parse_map(t_cub3d *t, char *line)
 	j = -1;
 	if (!sp)
 		sp = t->sprites_number;
+	printf("Line is %s\n", line);
 	while (++j < t->lenline)
 	{
+		if (i == 0)
+			if (line[k] != '1' && line[k] != ' ')
+				{
+					printf("Here1\n");
+					return (exit_parse_map(t, i));}
+		if (i == t->nb_lines - 1)
+			if (line[k] != '1' && line[k] != ' ')
+				{
+					printf("Here2\n");
+					return (exit_parse_map(t, i));}
+		if (k - space == t->lenline - 1)
+			if (line[k] != '1' && line[k] != ' ')
+				{
+					printf("Here3\n");
+					return (exit_parse_map(t, i));}
 		while (line[k] == ' ')
+		{
+			space++;
 			k++;
+		}
 		if (k == 0 && line[k] != '1')
 			return (exit_parse_map(t, i));
 		else if (line[k] == 'N' || line[k] == 'E'
@@ -88,6 +109,8 @@ int			parse_map(t_cub3d *t, char *line)
 				t->x_plane = -FOV;
 				t->y_plane = 0.;
 			}
+			if (t->x_pos || t->y_pos)
+				return (exit_parse_map(t, i));
 			t->x_pos = i;
 			t->y_pos = j;
 			t->map[i][j] = 0;

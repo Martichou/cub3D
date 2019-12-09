@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:26:49 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/09 17:25:55 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/09 17:39:32 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static int	check_val(t_cub3d *t)
 {
 	if (t->window_width == 0 || t->window_height == 0)
 		return (0);
+	if (t->x_pos == 0 || t->y_pos == 0)
+		return (0);
 	return (1);
 }
 
@@ -67,19 +69,6 @@ int				main(int ac, char **av)
 	t->mlx = mlx_init();
 	if (!(parse(t, av[1])))
 		return (error_printf(t));
-
-	int i = 0;
-	while (i < t->nb_lines)
-	{
-		int k = 0;
-		while (k < t->lenline)
-		{
-			printf("%d", t->map[i][k]);
-			k++;
-		}
-		printf("\n");
-		i++;
-	}
 	if (!check_val(t))
 		return (error_printf(t));
 	t->win = mlx_new_window(t->mlx, t->window_width, t->window_height, TITLE);

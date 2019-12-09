@@ -1,5 +1,16 @@
+R 1080 768
+NO ./textures/redbrick.xpm
+SO ./textures/mossy.xpm
+WE ./textures/stone.xpm
+EA ./textures/wood.xpm
+
+S ./textures/sprites/chest.xpm
+X ./textures/sprites/skeleton.xpm
+F 220,100,0
+C 225,30,0
+
 1111111111111
 1010101010101
-100100X00100
+100100N00100
 1010101010101
 1111111111111

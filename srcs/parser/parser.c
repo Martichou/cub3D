@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 20:36:16 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/09 16:19:17 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/09 17:59:47 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,12 @@ static int	setup_map(t_cub3d *t, char *filename)
 		}
 		free(line);
 	}
+	if (*line == '1')
+	{
+		t->sprites_number += count_sprites(line);
+		t->nb_lines++;
+	}
+	free(line);
 	close(fd);
 	if (ret == -1)
 		return (0);
