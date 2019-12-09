@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:26:49 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/09 11:38:35 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/09 16:47:49 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int				main(int ac, char **av)
 		t->player->name = av[0];
 	t->mlx = mlx_init();
 	if (!(parse(t, av[1])))
+		return (error_printf(t));
+	if (t->window_width == 0 || t->window_height == 0)
 		return (error_printf(t));
 	t->win = mlx_new_window(t->mlx, t->window_width, t->window_height, TITLE);
 	mlx_hook(t->win, 17, 0L, exit_program, t);
