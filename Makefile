@@ -6,7 +6,7 @@
 #    By: marandre <marandre@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/21 20:24:19 by marandre          #+#    #+#              #
-#    Updated: 2019/12/09 21:00:01 by marandre         ###   ########.fr        #
+#    Updated: 2019/12/10 14:15:09 by marandre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,8 +60,7 @@ fclean:
 	@make -C libft fclean
 	@make -C minilibx_opengl clean
 	@make -C minilibx_swift clean
-	@rm -f $(OBJ)
-	@rmdir $(OBJ_PATH) 2> /dev/null || true
+	@rm -rf $(OBJ_PATH)
 	@rm -f $(NAME)
 
 re: fclean all
