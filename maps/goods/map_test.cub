@@ -8,15 +8,7 @@ S ./textures/sprites/chest.xpm
 X ./textures/sprites/skeleton.xpm
 
 
-F 220,100,0
-
-
 NO ./textures/redbrick.xpm
-
-
-C 225,30,0
-
-F 220,100,0
 
 1 1 1 1 1     1 1 1 1 1
 1 0 0 0 0 3 0 0 1 1

@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:26:49 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/09 18:20:19 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/10 15:32:31 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int		cub3d(t_cub3d *t)
 {
+	t->texture = 1;
 	t->lenline = -1;
 	t->player->shooting = 0;
 	t->player->fr = 17;
@@ -40,6 +41,12 @@ static int		check_val(t_cub3d *t)
 	if (t->window_width == 0 || t->window_height == 0)
 		return (0);
 	if (t->x_pos == 0 || t->y_pos == 0)
+		return (0);
+	if (!t->tex[0].img || !t->tex[1].img || !t->tex[2].img || !t->tex[3].img
+		|| !t->tex[4].img || !t->tex[5].img || !t->tex[6].img || !t->tex[7].img
+		|| !t->tex[8].img || !t->tex[9].img)
+		return (0);
+	if (t->sprites_number > 0 && (!t->tex[10].img))
 		return (0);
 	return (1);
 }
