@@ -6,7 +6,7 @@
 #    By: marandre <marandre@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/21 20:24:19 by marandre          #+#    #+#              #
-#    Updated: 2019/12/10 14:15:09 by marandre         ###   ########.fr        #
+#    Updated: 2019/12/10 16:23:00 by marandre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,8 @@ fclean:
 	@rm -f $(NAME)
 
 re: fclean all
+
+bonus: all
 
 minilibx_all:
 	make -C $(MINILIBX_PATH) all
