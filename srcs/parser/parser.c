@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 20:36:16 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/10 12:10:07 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/10 15:58:59 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int				parse_line(t_cub3d *t, char *line)
 	map = !!map * map;
 	if (!*line && !map)
 		return (1);
-	else if (!*line && map)
+	else if (map && *line && *line != '1')
 		return ((t->nb_lines = map) & 0);
 	i = -1;
 	while (++i < (int)OPTIONS_PARSERS_SIZE)

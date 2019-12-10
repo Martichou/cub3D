@@ -1,0 +1,18 @@
+R 848 480
+NO ./textures/redbrick.xpm
+SO ./textures/mossy.xpm
+WE ./textures/stone.xpm
+EA ./textures/wood.xpm
+
+S ./textures/sprites/chest.xpm
+X ./textures/sprites/skeleton.xpm
+F 184,113,39
+C 51,198,227
+
+
+
+111
+1S1
+111
+
+
