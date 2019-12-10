@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:26:49 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/10 15:32:31 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/10 16:14:23 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static int		cub3d(t_cub3d *t)
 		t->is_save = 0;
 	if (!(t->zbuffer = malloc(sizeof(double) * t->window_width)))
 		return (0);
+	system("afplay ./sounds/sound.mp3& 2&>/dev/null >/dev/null");
 	return (1);
 }
 
