@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:25:35 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/10 14:09:02 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/11 21:16:07 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@
 # include <math.h>
 # include <mlx.h>
 # include <time.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
+#include <sys/ioctl.h>
 
 # define TITLE 				"cub3D"
 
@@ -101,12 +106,23 @@ typedef struct				s_player
 	int						ended;
 }							t_player;
 
+typedef struct				s_other
+{
+	double					x_pos;
+	double					y_pos;
+}							t_other;
+
 typedef struct				s_cub3d
 {
+	char					*address;
+	int						socketfd;
+	int						port;
+	int						port_other;
+	t_other					*other;
 	t_player				*player;
 	short					is_save;
 	short					sprites_number;
-	t_tex					tex[12];
+	t_tex					tex[13];
 	t_sprites				*sprites;
 	t_color					floor_color;
 	t_color					ceilling_color;
@@ -234,5 +250,17 @@ int							setup_barrel(t_cub3d *t);
 int							ft_ao(int clr, double percent);
 int							ft_gt_colors(int clr1, int clr2, double val);
 int							ft_shade_color(int clr, double val);
+
+/*
+** Socket multi
+*/
+int							socket_frame(t_cub3d *t);
+int							socket_init(t_cub3d *t);
+int							send_movement(t_cub3d *t, int bypass);
+
+/*
+** Draw player
+*/
+int							draw_player(t_cub3d *t);
 
 #endif

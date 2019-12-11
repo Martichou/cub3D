@@ -6,3 +6,5 @@ cub3D
 *.dylib
 *.swiftdoc
 *.swiftmodule
+built.zip
+built

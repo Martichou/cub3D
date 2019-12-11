@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:26:49 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/10 16:14:23 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/11 21:25:40 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static int		cub3d(t_cub3d *t)
 {
-	t->texture = 1;
 	t->lenline = -1;
 	t->player->shooting = 0;
 	t->player->fr = 17;
@@ -27,6 +26,7 @@ static int		cub3d(t_cub3d *t)
 		t->is_save = 0;
 	if (!(t->zbuffer = malloc(sizeof(double) * t->window_width)))
 		return (0);
+	t->other = NULL;
 	system("afplay ./sounds/sound.mp3& 2&>/dev/null >/dev/null");
 	return (1);
 }
@@ -62,7 +62,12 @@ static void		check_name_save(int ac, char **av, t_cub3d *t)
 			t->is_save = 1;
 		}
 		else
+		{
+			t->address = av[5];
+			t->port = ft_atoi(av[3]);
+			t->port_other = ft_atoi(av[4]);
 			t->player->name = av[2];
+		}
 	}
 	else
 		t->player->name = av[0];
@@ -92,6 +97,7 @@ int				main(int ac, char **av)
 	mlx_mouse_hook(t->win, mouse_hook, t);
 	if (!cub3d(t))
 		return (error_printf(t));
+	socket_init(t);
 	mlx_loop_hook(t->mlx, move, t);
 	mlx_loop(t->mlx);
 	return (0);

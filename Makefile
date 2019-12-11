@@ -6,7 +6,7 @@
 #    By: marandre <marandre@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/21 20:24:19 by marandre          #+#    #+#              #
-#    Updated: 2019/12/10 16:23:00 by marandre         ###   ########.fr        #
+#    Updated: 2019/12/11 21:06:24 by marandre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ SRC_PATH = srcs
 SRC_NAME = main.c utils.c move.c key.c ray.c draw.c \
 		parser/parser.c parser/parse_color.c parser/parse_map.c \
 		parser/parse_resolution.c parser/parse_textures.c \
-		parser/parse_sprite.c ao.c fps.c bmp.c dda.c sprites.c
+		parser/parse_sprite.c ao.c fps.c bmp.c dda.c sprites.c \
+		multi/server.c multi/client.c multi/draw_player.c
 
 OBJ_PATH = objs
 OBJ_NAME = $(SRC_NAME:.c=.o)
@@ -43,6 +44,7 @@ $(NAME): $(OBJ) libft/libft.a
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir -pv $(OBJ_PATH)/parser 2> /dev/null || true
+	@mkdir -pv $(OBJ_PATH)/multi 2> /dev/null || true
 	@$(CC) $(CFLAGS) -c $< $(CPPFLAGS) -o $@
 
 libft:

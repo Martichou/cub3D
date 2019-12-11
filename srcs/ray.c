@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:47:52 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/09 18:41:33 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/11 21:07:02 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ static void		floor_and_ceiling(t_cub3d *t, int x)
 static void		sprites_and_put(t_cub3d *t)
 {
 	if (!draw_sprites(t))
+		error_printf(t);
+	if (t->other && !draw_player(t))
 		error_printf(t);
 	if (t->is_save)
 	{
