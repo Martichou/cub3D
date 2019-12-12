@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 18:26:54 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/09 20:57:55 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/13 00:26:43 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,14 @@ void		dda(t_cub3d *t)
 			t->x_sidedist += t->x_deltadist;
 			t->x_map += t->x_step;
 			t->side = (t->x_pos > t->x_map) ? 0 : 1;
-			t->color = ft_gt_colors((t->side == 0) ? WALL_N : WALL_S, AO,
-				((t->walldist / 4) / ((4. - (2. * (float)(1))) - 0.4)));
+			t->color = (t->side == 0) ? WALL_N : WALL_S;
 		}
 		else
 		{
 			t->y_sidedist += t->y_deltadist;
 			t->y_map += t->y_step;
 			t->side = (t->y_pos > t->y_map) ? 2 : 3;
-			t->color = ft_gt_colors((t->side == 2) ? WALL_W : WALL_E, AO,
-				((t->walldist / 4) / ((4. - (2. * (float)(1))) - 0.4)));
+			t->color = (t->side == 2) ? WALL_W : WALL_E;
 		}
 		if (t->map[t->x_map][t->y_map] == 1)
 			t->hit = 1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:25:35 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/11 21:16:07 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/13 00:27:44 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,13 +243,6 @@ int							parse_sprite_texture_10(t_cub3d *t, char *line);
 int							parse_sprite_texture_11(t_cub3d *t, char *line);
 int							setup_sky(t_cub3d *t);
 int							setup_barrel(t_cub3d *t);
-
-/*
-** AO
-*/
-int							ft_ao(int clr, double percent);
-int							ft_gt_colors(int clr1, int clr2, double val);
-int							ft_shade_color(int clr, double val);
 
 /*
 ** Socket multi

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:51:23 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/09 18:11:15 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/13 00:25:18 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,8 @@ static void	put_pxl_to_img(t_cub3d *t, int x, int y)
 				t->x_text % 64 * t->tex[t->id].bpp / 8], sizeof(int));
 	}
 	else if (x < t->window_width && y < t->window_height)
-	{
-		t->color = ft_ao(t->color, ((y - t->min) * 100 / (t->max - t->min)));
 		ft_memcpy(t->img_ptr + 4 * t->window_width * y + x * 4,
 			&t->color, sizeof(int));
-	}
 }
 
 void		draw_wall(int x, int start, int end, t_cub3d *t)
