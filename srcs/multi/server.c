@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 19:18:00 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/12 23:53:18 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/13 00:19:36 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,15 @@ int		socket_init(t_cub3d *t)
 	struct sockaddr_in servaddr;
 
 	if ((t->socketfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0 )
-	{
-		perror("socket creation failed");
 		return (0);
-	}
-
 	if(ioctl(t->socketfd, FIONBIO, &_true) == -1)
-	{
-		perror("ioctlsocket failed");
 		return (0);
-	}
-
-	memset(&servaddr, 0, sizeof(servaddr));
-
+	ft_bzero(&servaddr, sizeof(servaddr));
 	servaddr.sin_family = AF_INET;
 	servaddr.sin_addr.s_addr = INADDR_ANY;
 	servaddr.sin_port = htons(t->port);
-
 	if (bind(t->socketfd, (const struct sockaddr*)&servaddr, sizeof(servaddr)) < 0 )
-	{
-		perror("bind failed");
 		return (0);
-	}
 	return (1);
 }
 

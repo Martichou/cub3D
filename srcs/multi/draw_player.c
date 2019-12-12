@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 21:01:23 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/11 21:13:05 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/13 00:19:48 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	fill_struct(t_sprites_work *spw, t_cub3d *t)
 		(-t->y_plane * spw->sp_x + t->x_plane * spw->sp_y);
 	spw->sp_screen_x = (int)((t->window_width / 2) *
 		(1 + spw->transform_x / spw->transform_y));
-	spw->vms = (int)(64 / spw->transform_y);
+	spw->vms = (int)(96 / spw->transform_y);
 	spw->sp_height = abs((int)(t->window_height / (spw->transform_y))) / 1;
 	spw->draw_start_y = -spw->sp_height / 2 +
 		t->window_height / 2 + spw->vms;
