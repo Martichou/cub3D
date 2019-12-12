@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hub.c                                              :+:      :+:    :+:   */
+/*   hud.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 14:42:06 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/13 00:30:05 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/13 00:35:05 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ void		fps(t_cub3d *t)
 {
 	static int		timestamp;
 	static int		fps;
-	static int		fps_2;
+	static int		fps_temp;
 
 	if (time(NULL) != timestamp)
 	{
-		fps_2 = fps;
+		fps_temp = fps;
 		fps = 0;
 		timestamp = (int)time(NULL);
 	}
@@ -53,6 +53,6 @@ void		fps(t_cub3d *t)
 		fps++;
 	mlx_string_put(t->mlx, t->win, 10, 20, 0xffffff, t->player->name);
 	mlx_string_put(t->mlx, t->win, t->window_width - 20,
-		20, 0xe5e500, ft_itoa(fps_2 + 1));
+		20, 0xe5e500, ft_itoa(fps_temp + 1));
 	put_hud(t);
 }

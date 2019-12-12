@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:25:35 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/13 00:27:44 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/13 00:35:30 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 #include <sys/ioctl.h>
 
 # define TITLE 				"cub3D"
-
 # define WALL_N				0x3d3d3d
 # define WALL_E				0x0B2D4B
 # define WALL_S				0x32a852
