@@ -6,22 +6,22 @@
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:43:04 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/13 00:00:19 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/13 00:29:08 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-static void	check_goal(t_cub3d *t)
-{
-	if (t->map[(int)t->x_pos][(int)t->y_pos] == 2)
-	{
-		t->player->chest_collected++;
-		if (t->player->chest_collected == t->player->chest_to_collect)
-			t->player->ended = 1;
-		t->map[(int)t->x_pos][(int)t->y_pos] = 0;
-	}
-}
+// static void	check_goal(t_cub3d *t)
+// {
+// 	if (t->map[(int)t->x_pos][(int)t->y_pos] == 2)
+// 	{
+// 		t->player->chest_collected++;
+// 		if (t->player->chest_collected == t->player->chest_to_collect)
+// 			t->player->ended = 1;
+// 		t->map[(int)t->x_pos][(int)t->y_pos] = 0;
+// 	}
+// }
 
 static void	look(t_cub3d *t)
 {
@@ -90,7 +90,7 @@ int			move(t_cub3d *t)
 	if (t->address)
 		send_movement(t, 0);
 	look(t);
-	check_goal(t);
+	//check_goal(t);
 	ray(t);
 	draw_gun(t);
 	fps(t);

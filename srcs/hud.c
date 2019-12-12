@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fps.c                                              :+:      :+:    :+:   */
+/*   hub.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 14:42:06 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/09 18:18:02 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/13 00:30:05 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ static void	put_hud(t_cub3d *t)
 	while (i++ < 100)
 		mlx_string_put(t->mlx, t->win, 10 + i,
 			t->window_height - 10, 0x808080, "|");
-	mlx_string_put(t->mlx, t->win, 15,
-		t->window_height - 30, 0xffffff, "Collected   / ");
-	mlx_string_put(t->mlx, t->win, 90,
-		t->window_height - 30, 0xffffff, ft_itoa(t->player->chest_collected));
-	mlx_string_put(t->mlx, t->win, 108,
-		t->window_height - 30, 0xffffff, ft_itoa(t->player->chest_to_collect));
+	// mlx_string_put(t->mlx, t->win, 15,
+	// 	t->window_height - 30, 0xffffff, "Collected   / ");
+	// mlx_string_put(t->mlx, t->win, 90,
+	// 	t->window_height - 30, 0xffffff, ft_itoa(t->player->chest_collected));
+	// mlx_string_put(t->mlx, t->win, 108,
+	// 	t->window_height - 30, 0xffffff, ft_itoa(t->player->chest_to_collect));
 	mlx_string_put(t->mlx, t->win, t->window_width - 30,
 		t->window_height - 10, 0xffffff, ft_itoa(t->player->bullets));
 	mlx_string_put(t->mlx, t->win,
