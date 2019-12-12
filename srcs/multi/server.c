@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 19:18:00 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/11 21:14:44 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/12 23:53:18 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int		socket_frame(t_cub3d *t)
 			init++;
 		}
 		t->other = &o;
-		printf("Data received: %f, %f\n", t->other->x_pos, t->other->y_pos);
 		return (0);
 	}
 	return (0);

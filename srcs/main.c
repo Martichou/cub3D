@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:26:49 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/11 21:25:40 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/12 23:53:59 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,12 @@ static void		check_name_save(int ac, char **av, t_cub3d *t)
 		}
 		else
 		{
-			t->address = av[5];
-			t->port = ft_atoi(av[3]);
-			t->port_other = ft_atoi(av[4]);
+			if (ac == 6)
+			{
+				t->address = av[5];
+				t->port = ft_atoi(av[3]);
+				t->port_other = ft_atoi(av[4]);
+			}
 			t->player->name = av[2];
 		}
 	}

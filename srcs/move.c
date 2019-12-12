@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:43:04 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/11 20:59:19 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/13 00:00:19 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,12 @@ static void	move_ud(t_cub3d *t)
 
 int			move(t_cub3d *t)
 {
-	socket_frame(t);
+	if (t->address)
+		socket_frame(t);
 	move_ud(t);
 	move_lr(t);
-	send_movement(t, 0);
+	if (t->address)
+		send_movement(t, 0);
 	look(t);
 	check_goal(t);
 	ray(t);
