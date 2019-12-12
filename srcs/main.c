@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:26:49 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/12 23:53:59 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/13 00:40:36 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,9 @@ static int		cub3d(t_cub3d *t)
 	t->player->reload = 0;
 	t->x_pos += 0.5;
 	t->y_pos += 0.5;
-	if (!t->is_save)
-		t->is_save = 0;
 	if (!(t->zbuffer = malloc(sizeof(double) * t->window_width)))
 		return (0);
-	t->other = NULL;
+	t->multi.other = NULL;
 	system("afplay ./sounds/sound.mp3& 2&>/dev/null >/dev/null");
 	return (1);
 }
@@ -56,21 +54,13 @@ static void		check_name_save(int ac, char **av, t_cub3d *t)
 {
 	if (ac > 2)
 	{
-		if (ft_strncmp(av[2], "--save", ft_strlen(av[2])) == 0)
+		if (ac == 6)
 		{
-			t->player->name = av[0];
-			t->is_save = 1;
+			t->multi.address = av[5];
+			t->multi.port = ft_atoi(av[3]);
+			t->multi.port_other = ft_atoi(av[4]);
 		}
-		else
-		{
-			if (ac == 6)
-			{
-				t->address = av[5];
-				t->port = ft_atoi(av[3]);
-				t->port_other = ft_atoi(av[4]);
-			}
-			t->player->name = av[2];
-		}
+		t->player->name = av[2];
 	}
 	else
 		t->player->name = av[0];

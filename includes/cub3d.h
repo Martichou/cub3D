@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:25:35 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/13 00:35:30 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/13 00:40:02 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,15 +111,19 @@ typedef struct				s_other
 	double					y_pos;
 }							t_other;
 
-typedef struct				s_cub3d
+typedef struct				s_multi
 {
 	char					*address;
 	int						socketfd;
 	int						port;
 	int						port_other;
 	t_other					*other;
+}							t_multi;
+
+typedef struct				s_cub3d
+{
+	t_multi					multi;
 	t_player				*player;
-	short					is_save;
 	short					sprites_number;
 	t_tex					tex[13];
 	t_sprites				*sprites;

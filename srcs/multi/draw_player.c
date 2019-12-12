@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 21:01:23 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/13 00:19:48 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/13 00:38:50 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	fill_struct(t_sprites_work *spw, t_cub3d *t)
 {
-	spw->sp_x = t->other->x_pos - t->x_pos;
-	spw->sp_y = t->other->y_pos - t->y_pos;
+	spw->sp_x = t->multi.other->x_pos - t->x_pos;
+	spw->sp_y = t->multi.other->y_pos - t->y_pos;
 	spw->inv_det = 1.0 / (t->x_plane * t->y_dir - t->x_dir * t->y_plane);
 	spw->transform_x = spw->inv_det *
 		(t->y_dir * spw->sp_x - t->x_dir * spw->sp_y);

@@ -6,7 +6,7 @@
 #    By: marandre <marandre@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/21 20:24:19 by marandre          #+#    #+#              #
-#    Updated: 2019/12/13 00:30:19 by marandre         ###   ########.fr        #
+#    Updated: 2019/12/13 00:41:09 by marandre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRC_PATH = srcs
 SRC_NAME = main.c utils.c move.c key.c ray.c draw.c \
 		parser/parser.c parser/parse_color.c parser/parse_map.c \
 		parser/parse_resolution.c parser/parse_textures.c \
-		parser/parse_sprite.c hud.c bmp.c dda.c sprites.c \
+		parser/parse_sprite.c hud.c dda.c sprites.c \
 		multi/server.c multi/client.c multi/draw_player.c
 
 OBJ_PATH = objs
@@ -58,7 +58,6 @@ clean:
 	@rmdir $(OBJ_PATH) 2> /dev/null || true
 
 fclean:
-	@rm -rf screenshot.bmp
 	@make -C libft fclean
 	@make -C minilibx_opengl clean
 	@make -C minilibx_swift clean

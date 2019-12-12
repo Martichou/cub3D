@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:43:04 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/13 00:29:08 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/13 00:37:47 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,11 @@ static void	move_ud(t_cub3d *t)
 
 int			move(t_cub3d *t)
 {
-	if (t->address)
+	if (t->multi.address)
 		socket_frame(t);
 	move_ud(t);
 	move_lr(t);
-	if (t->address)
+	if (t->multi.address)
 		send_movement(t, 0);
 	look(t);
 	//check_goal(t);
