@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 21:01:10 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/10 14:00:14 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/13 01:25:49 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,22 @@ static int	set_player_pos(t_cub3d *t, char line, int i, int j)
 {
 	if (line == 'N' || line == 'S')
 	{
-		t->x_dir = (line == 'N') ? -1 : 1;
-		t->y_dir = 0.;
+		t->player->x_dir = (line == 'N') ? -1 : 1;
+		t->player->y_dir = 0.;
 		t->x_plane = 0.;
 		t->y_plane = (line == 'N') ? FOV : -FOV;
 	}
 	else
 	{
-		t->x_dir = 0.;
-		t->y_dir = (line == 'E') ? 1. : -1.;
+		t->player->x_dir = 0.;
+		t->player->y_dir = (line == 'E') ? 1. : -1.;
 		t->x_plane = (line == 'E') ? FOV : -FOV;
 		t->y_plane = 0.;
 	}
-	if (t->x_pos || t->y_pos)
+	if (t->player->x_pos || t->player->y_pos)
 		return (0);
-	t->x_pos = i;
-	t->y_pos = j;
+	t->player->x_pos = i;
+	t->player->y_pos = j;
 	t->map[i][j] = 0;
 	return (1);
 }

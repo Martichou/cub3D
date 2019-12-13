@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:44:41 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/09 18:15:36 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/13 01:21:59 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 int		key_press(int keycode, t_cub3d *t)
 {
 	if (keycode == 13)
-		t->move_up = 1;
+		t->key.move_up = 1;
 	else if (keycode == 1)
-		t->move_down = 1;
+		t->key.move_down = 1;
 	else if (keycode == 2)
-		t->move_right = 1;
+		t->key.move_right = 1;
 	else if (keycode == 0)
-		t->move_left = 1;
+		t->key.move_left = 1;
 	else if (keycode == 124)
-		t->look_right = 1;
+		t->key.look_right = 1;
 	else if (keycode == 123)
-		t->look_left = 1;
+		t->key.look_left = 1;
 	else if (keycode == 53)
 		exit_program(t);
 	else if (keycode == 17)
@@ -38,16 +38,16 @@ int		key_press(int keycode, t_cub3d *t)
 int		key_release(int keycode, t_cub3d *t)
 {
 	if (keycode == 13)
-		t->move_up = 0;
+		t->key.move_up = 0;
 	else if (keycode == 1)
-		t->move_down = 0;
+		t->key.move_down = 0;
 	else if (keycode == 2)
-		t->move_right = 0;
+		t->key.move_right = 0;
 	else if (keycode == 0)
-		t->move_left = 0;
+		t->key.move_left = 0;
 	else if (keycode == 124)
-		t->look_right = 0;
+		t->key.look_right = 0;
 	else if (keycode == 123)
-		t->look_left = 0;
+		t->key.look_left = 0;
 	return (0);
 }

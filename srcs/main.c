@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:26:49 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/13 00:40:36 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/13 01:23:15 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static int		cub3d(t_cub3d *t)
 	t->player->life = 100;
 	t->player->bullets = 8;
 	t->player->reload = 0;
-	t->x_pos += 0.5;
-	t->y_pos += 0.5;
+	t->player->x_pos += 0.5;
+	t->player->y_pos += 0.5;
 	if (!(t->zbuffer = malloc(sizeof(double) * t->window_width)))
 		return (0);
 	t->multi.other = NULL;
@@ -39,7 +39,7 @@ static int		check_val(t_cub3d *t)
 {
 	if (t->window_width == 0 || t->window_height == 0)
 		return (0);
-	if (t->x_pos == 0 || t->y_pos == 0)
+	if (t->player->x_pos == 0 || t->player->y_pos == 0)
 		return (0);
 	if (!t->tex[0].img || !t->tex[1].img || !t->tex[2].img || !t->tex[3].img
 		|| !t->tex[4].img || !t->tex[5].img || !t->tex[6].img || !t->tex[7].img

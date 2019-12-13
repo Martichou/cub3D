@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 18:28:24 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/10 14:11:01 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/13 01:26:27 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 static void	fill_struct(t_sprites_work *spw, t_cub3d *t,
 	int *so, int i)
 {
-	spw->sp_x = t->sprites[so[i]].x + 0.5 - t->x_pos;
-	spw->sp_y = t->sprites[so[i]].y + 0.5 - t->y_pos;
-	spw->inv_det = 1.0 / (t->x_plane * t->y_dir - t->x_dir * t->y_plane);
+	spw->sp_x = t->sprites[so[i]].x + 0.5 - t->player->x_pos;
+	spw->sp_y = t->sprites[so[i]].y + 0.5 - t->player->y_pos;
+	spw->inv_det = 1.0 / (t->x_plane * t->player->y_dir - t->player->x_dir * t->y_plane);
 	spw->transform_x = spw->inv_det *
-		(t->y_dir * spw->sp_x - t->x_dir * spw->sp_y);
+		(t->player->y_dir * spw->sp_x - t->player->x_dir * spw->sp_y);
 	spw->transform_y = spw->inv_det *
 		(-t->y_plane * spw->sp_x + t->x_plane * spw->sp_y);
 	spw->sp_screen_x = (int)((t->window_width / 2) *
@@ -80,8 +80,8 @@ int			draw_sprites(t_cub3d *t)
 	while (++i < t->sprites_number)
 	{
 		so[i] = i;
-		sd[i] = ((t->x_pos - t->sprites[i].x) * (t->x_pos - t->sprites[i].x) +
-			(t->y_pos - t->sprites[i].y) * (t->y_pos - t->sprites[i].y));
+		sd[i] = ((t->player->x_pos - t->sprites[i].x) * (t->player->x_pos - t->sprites[i].x) +
+			(t->player->y_pos - t->sprites[i].y) * (t->player->y_pos - t->sprites[i].y));
 	}
 	sort_sprites(so, sd, t->sprites_number);
 	i = -1;

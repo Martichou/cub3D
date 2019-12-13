@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 19:44:28 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/13 00:38:24 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/13 01:26:41 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ int     send_movement(t_cub3d *t, int bypass)
 	servaddr.sin_family = AF_INET;
 	servaddr.sin_port = htons(t->multi.port_other);
 	servaddr.sin_addr.s_addr = inet_addr(t->multi.address);
-	if (!bypass && other.x_pos == t->x_pos && other.y_pos == t->y_pos)
+	if (!bypass && other.x_pos == t->player->x_pos && other.y_pos == t->player->y_pos)
 		return (1);
-	other.x_pos = t->x_pos;
-	other.y_pos = t->y_pos;
+	other.x_pos = t->player->x_pos;
+	other.y_pos = t->player->y_pos;
 	sendto(t->multi.socketfd, &other, sizeof(t_other), 0,
 		(const struct sockaddr *) &servaddr, sizeof(servaddr));
 	return (1);

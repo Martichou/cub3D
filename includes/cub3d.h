@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:25:35 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/13 01:17:51 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/13 01:22:39 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,10 @@ typedef struct				s_player
 	int						chest_collected;
 	int						chest_to_collect;
 	int						ended;
+	double					x_pos;
+	double					y_pos;
+	double					x_dir;
+	double					y_dir;
 }							t_player;
 
 typedef struct				s_other
@@ -121,15 +125,26 @@ typedef struct				s_multi
 	t_other					*other;
 }							t_multi;
 
+typedef struct				s_key
+{
+	int						move_up;
+	int						move_down;
+	int						move_left;
+	int						move_right;
+	int						look_right;
+	int						look_left;
+}							t_key;
+
 typedef struct				s_cub3d
 {
+	t_key					key;
 	t_multi					multi;
 	t_player				*player;
-	short					sprites_number;
 	t_tex					tex[13];
 	t_sprites				*sprites;
 	t_color					floor_color;
 	t_color					ceilling_color;
+	short					sprites_number;
 	void					*mlx;
 	void					*win;
 	void					*img;
@@ -152,12 +167,6 @@ typedef struct				s_cub3d
 	int						start;
 	int						end;
 	int						color;
-	int						move_up;
-	int						move_down;
-	int						move_left;
-	int						move_right;
-	int						look_right;
-	int						look_left;
 	int						x_text;
 	int						y_text;
 	int						id;
@@ -167,10 +176,6 @@ typedef struct				s_cub3d
 	int						min;
 	int						max;
 	double					*zbuffer;
-	double					x_pos;
-	double					y_pos;
-	double					x_dir;
-	double					y_dir;
 	double					x_plane;
 	double					y_plane;
 	double					x_cam;

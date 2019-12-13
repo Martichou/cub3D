@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:47:52 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/13 00:40:54 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/13 01:25:23 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 static void		ray_casting_init(t_cub3d *t, int x)
 {
 	t->x_cam = 2 * x / (double)(t->window_width) - 1;
-	t->x_raypos = t->x_pos;
-	t->y_raypos = t->y_pos;
-	t->x_raydir = t->x_dir + t->x_plane * t->x_cam;
-	t->y_raydir = t->y_dir + t->y_plane * t->x_cam;
+	t->x_raypos = t->player->x_pos;
+	t->y_raypos = t->player->y_pos;
+	t->x_raydir = t->player->x_dir + t->x_plane * t->x_cam;
+	t->y_raydir = t->player->y_dir + t->y_plane * t->x_cam;
 	t->x_map = (int)t->x_raypos;
 	t->y_map = (int)t->y_raypos;
 	dda_init(t);
