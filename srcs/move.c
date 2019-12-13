@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:43:04 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/13 00:37:47 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/13 01:17:39 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,16 @@ static void	move_lr(t_cub3d *t)
 {
 	if (t->move_right == 1)
 	{
-		if (t->map[(int)(t->x_pos + t->y_dir * MS)][(int)(t->y_pos)] != 1)
+		if (t->map[(int)(t->x_pos + t->y_dir * MS + ((t->y_dir < 0) ? -OFFSET : OFFSET))][(int)(t->y_pos)] != 1)
 			t->x_pos += t->y_dir * MS;
-		if (t->map[(int)(t->x_pos)][(int)(t->y_pos - t->x_dir * MS)] != 1)
+		if (t->map[(int)(t->x_pos)][(int)(t->y_pos - t->x_dir * MS - ((t->x_dir < 0) ? -OFFSET : OFFSET))] != 1)
 			t->y_pos -= t->x_dir * MS;
 	}
 	if (t->move_left == 1)
 	{
-		if (t->map[(int)(t->x_pos - t->y_dir * MS)][(int)(t->y_pos)] != 1)
+		if (t->map[(int)(t->x_pos - t->y_dir * MS - ((t->y_dir < 0) ? -OFFSET : OFFSET))][(int)(t->y_pos)] != 1)
 			t->x_pos -= t->y_dir * MS;
-		if (t->map[(int)(t->x_pos)][(int)(t->y_pos + t->x_dir * MS)] != 1)
+		if (t->map[(int)(t->x_pos)][(int)(t->y_pos + t->x_dir * MS + ((t->x_dir < 0) ? -OFFSET : OFFSET))] != 1)
 			t->y_pos += t->x_dir * MS;
 	}
 }
@@ -67,16 +67,16 @@ static void	move_ud(t_cub3d *t)
 {
 	if (t->move_up == 1)
 	{
-		if (t->map[(int)(t->x_pos + t->x_dir * MS)][(int)(t->y_pos)] != 1)
+		if (t->map[(int)(t->x_pos + t->x_dir * MS + ((t->x_dir < 0) ? -OFFSET : OFFSET))][(int)(t->y_pos)] != 1)
 			t->x_pos += t->x_dir * MS;
-		if (t->map[(int)(t->x_pos)][(int)(t->y_pos + t->y_dir * MS)] != 1)
+		if (t->map[(int)(t->x_pos)][(int)(t->y_pos + t->y_dir * MS + ((t->y_dir < 0) ? -OFFSET : OFFSET))] != 1)
 			t->y_pos += t->y_dir * MS;
 	}
 	if (t->move_down == 1)
 	{
-		if (t->map[(int)(t->x_pos - t->x_dir * MS)][(int)(t->y_pos)] != 1)
+		if (t->map[(int)(t->x_pos - t->x_dir * MS - ((t->x_dir < 0) ? -OFFSET : OFFSET))][(int)(t->y_pos)] != 1)
 			t->x_pos -= t->x_dir * MS;
-		if (t->map[(int)(t->x_pos)][(int)(t->y_pos - t->y_dir * MS)] != 1)
+		if (t->map[(int)(t->x_pos)][(int)(t->y_pos - t->y_dir * MS - ((t->y_dir < 0) ? -OFFSET : OFFSET))] != 1)
 			t->y_pos -= t->y_dir * MS;
 	}
 }

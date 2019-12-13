@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:25:35 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/13 00:40:02 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/13 01:17:51 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 # define UDIV				2
 # define VDIV				2
 # define VMOVE				194.0
+# define OFFSET				0.15
 
 typedef union
 {
