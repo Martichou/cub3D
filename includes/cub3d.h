@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:25:35 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/13 01:22:39 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/13 01:31:01 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,19 @@ typedef struct				s_key
 	int						look_left;
 }							t_key;
 
+typedef struct				s_window
+{
+	void					*mlx;
+	void					*win;
+	void					*img;
+	void					*img_ptr;
+	int						window_width;
+	int						window_height;
+	int						bpp;
+	int						endian;
+	int						sl;
+}							t_window;
+
 typedef struct				s_cub3d
 {
 	t_key					key;
@@ -144,19 +157,11 @@ typedef struct				s_cub3d
 	t_sprites				*sprites;
 	t_color					floor_color;
 	t_color					ceilling_color;
+	t_window				window;
 	short					sprites_number;
-	void					*mlx;
-	void					*win;
-	void					*img;
-	void					*img_ptr;
 	int						**map;
-	int						window_width;
-	int						window_height;
 	int						nb_lines;
 	int						lenline;
-	int						bpp;
-	int						endian;
-	int						sl;
 	int						x_map;
 	int						y_map;
 	int						x_step;

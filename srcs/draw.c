@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:51:23 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/13 00:25:18 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/13 01:32:29 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 static void	put_pxl_to_img(t_cub3d *t, int x, int y)
 {
-	if (t->texture == 1 && x < t->window_width && y < t->window_height)
+	if (t->texture == 1 && x < t->window.window_width && y < t->window.window_height)
 	{
-		t->y_text = abs((((y * 256 - t->window_height * 128 +
+		t->y_text = abs((((y * 256 - t->window.window_height * 128 +
 			t->lineheight * 128) * 64) / t->lineheight) / 256);
-		ft_memcpy(t->img_ptr + 4 * t->window_width * y + x * 4,
+		ft_memcpy(t->window.img_ptr + 4 * t->window.window_width * y + x * 4,
 				&t->tex[t->id].data[t->y_text % 64 * t->tex[t->id].sizeline +
 				t->x_text % 64 * t->tex[t->id].bpp / 8], sizeof(int));
 	}
-	else if (x < t->window_width && y < t->window_height)
-		ft_memcpy(t->img_ptr + 4 * t->window_width * y + x * 4,
+	else if (x < t->window.window_width && y < t->window.window_height)
+		ft_memcpy(t->window.img_ptr + 4 * t->window.window_width * y + x * 4,
 			&t->color, sizeof(int));
 }
 
@@ -46,12 +46,12 @@ void		draw_wall(int x, int start, int end, t_cub3d *t)
 void		draw_sky(t_cub3d *t)
 {
 	t->x_text = 0;
-	while (t->x_text < t->window_width)
+	while (t->x_text < t->window.window_width)
 	{
 		t->y_text = 0;
-		while (t->y_text < t->window_height / 2)
+		while (t->y_text < t->window.window_height / 2)
 		{
-			ft_memcpy(t->img_ptr + 4 * t->window_width * t->y_text +
+			ft_memcpy(t->window.img_ptr + 4 * t->window.window_width * t->y_text +
 					t->x_text * 4, &t->tex[4].data[t->y_text % 512 *
 					t->tex[4].sizeline + t->x_text % 512 *
 					t->tex[4].bpp / 8], sizeof(int));
@@ -64,19 +64,19 @@ void		draw_sky(t_cub3d *t)
 static void	animate_shotgun(t_cub3d *t, int posx, int posy)
 {
 	if (t->player->fr >= 15 && t->player->reload == 0)
-		mlx_put_image_to_window(t->mlx, t->win, t->tex[6].img, posx, posy);
+		mlx_put_image_to_window(t->window.mlx, t->window.win, t->tex[6].img, posx, posy);
 	else if (t->player->fr >= 12 && t->player->fr <= 14
 		&& t->player->reload == 0)
-		mlx_put_image_to_window(t->mlx, t->win, t->tex[7].img, posx, posy);
+		mlx_put_image_to_window(t->window.mlx, t->window.win, t->tex[7].img, posx, posy);
 	else if (t->player->fr >= 10 && t->player->fr <= 11
 		&& t->player->reload == 0)
-		mlx_put_image_to_window(t->mlx, t->win, t->tex[8].img, posx, posy);
+		mlx_put_image_to_window(t->window.mlx, t->window.win, t->tex[8].img, posx, posy);
 	else if (t->player->fr >= 7 && t->player->fr <= 9 && t->player->reload == 0)
-		mlx_put_image_to_window(t->mlx, t->win, t->tex[9].img, posx, posy);
+		mlx_put_image_to_window(t->window.mlx, t->window.win, t->tex[9].img, posx, posy);
 	else if (t->player->fr >= 5 && t->player->fr <= 7 && t->player->reload == 0)
-		mlx_put_image_to_window(t->mlx, t->win, t->tex[9].img, posx, posy);
+		mlx_put_image_to_window(t->window.mlx, t->window.win, t->tex[9].img, posx, posy);
 	else if (t->player->fr >= 1 && t->player->fr <= 4 && t->player->reload == 0)
-		mlx_put_image_to_window(t->mlx, t->win, t->tex[7].img, posx, posy);
+		mlx_put_image_to_window(t->window.mlx, t->window.win, t->tex[7].img, posx, posy);
 	t->player->fr--;
 	if (t->player->fr == 1)
 	{
@@ -95,10 +95,10 @@ void		draw_gun(t_cub3d *t)
 	int posx;
 	int posy;
 
-	posx = (t->window_width - 400) / 2;
-	posy = t->window_height - 400;
+	posx = (t->window.window_width - 400) / 2;
+	posy = t->window.window_height - 400;
 	if (t->player->shooting == 0)
-		mlx_put_image_to_window(t->mlx, t->win, t->tex[5].img, posx, posy);
+		mlx_put_image_to_window(t->window.mlx, t->window.win, t->tex[5].img, posx, posy);
 	else
 	{
 		if (t->player->fr == 17 && (t->player->fr--))

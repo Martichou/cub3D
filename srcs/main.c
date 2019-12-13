@@ -6,7 +6,7 @@
 /*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:26:49 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/13 01:23:15 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/13 01:29:33 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int		cub3d(t_cub3d *t)
 	t->player->reload = 0;
 	t->player->x_pos += 0.5;
 	t->player->y_pos += 0.5;
-	if (!(t->zbuffer = malloc(sizeof(double) * t->window_width)))
+	if (!(t->zbuffer = malloc(sizeof(double) * t->window.window_width)))
 		return (0);
 	t->multi.other = NULL;
 	system("afplay ./sounds/sound.mp3& 2&>/dev/null >/dev/null");
@@ -37,7 +37,7 @@ static int		mouse_hook(t_cub3d *t)
 
 static int		check_val(t_cub3d *t)
 {
-	if (t->window_width == 0 || t->window_height == 0)
+	if (t->window.window_width == 0 || t->window.window_height == 0)
 		return (0);
 	if (t->player->x_pos == 0 || t->player->y_pos == 0)
 		return (0);
@@ -77,21 +77,21 @@ int				main(int ac, char **av)
 		|| ft_strchr_at_end(av[1], ".cub") == -1)
 		return (error_printf(t));
 	check_name_save(ac, av, t);
-	t->mlx = mlx_init();
+	t->window.mlx = mlx_init();
 	if (!(parse(t, av[1])))
 		return (error_printf(t));
 	if (!check_val(t))
 		return (error_printf(t));
-	t->win = mlx_new_window(t->mlx, t->window_width, t->window_height, TITLE);
-	mlx_hook(t->win, 17, 0L, exit_program, t);
-	mlx_hook(t->win, 2, (1L << 0), key_press, t);
-	mlx_hook(t->win, 3, (1L << 1), key_release, t);
-	mlx_hook(t->win, 17L, 0, exit_program, t);
-	mlx_mouse_hook(t->win, mouse_hook, t);
+	t->window.win = mlx_new_window(t->window.mlx, t->window.window_width, t->window.window_height, TITLE);
+	mlx_hook(t->window.win, 17, 0L, exit_program, t);
+	mlx_hook(t->window.win, 2, (1L << 0), key_press, t);
+	mlx_hook(t->window.win, 3, (1L << 1), key_release, t);
+	mlx_hook(t->window.win, 17L, 0, exit_program, t);
+	mlx_mouse_hook(t->window.win, mouse_hook, t);
 	if (!cub3d(t))
 		return (error_printf(t));
 	socket_init(t);
-	mlx_loop_hook(t->mlx, move, t);
-	mlx_loop(t->mlx);
+	mlx_loop_hook(t->window.mlx, move, t);
+	mlx_loop(t->window.mlx);
 	return (0);
 }

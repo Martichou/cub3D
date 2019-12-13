@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 20:32:01 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/09 18:07:28 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/13 01:29:54 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int			exit_program(t_cub3d *t)
 	t->zbuffer = NULL;
 	free(t->player);
 	t->player = NULL;
-	if (t->mlx && t->win)
+	if (t->window.mlx && t->window.win)
 	{
-		mlx_clear_window(t->mlx, t->win);
-		mlx_destroy_window(t->mlx, t->win);
+		mlx_clear_window(t->window.mlx, t->window.win);
+		mlx_destroy_window(t->window.mlx, t->window.win);
 	}
 	free(t);
 	t = NULL;

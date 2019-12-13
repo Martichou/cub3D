@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marandre <marandre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marandre <marandre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 20:36:16 by marandre          #+#    #+#             */
-/*   Updated: 2019/12/10 15:58:59 by marandre         ###   ########.fr       */
+/*   Updated: 2019/12/13 01:32:44 by marandre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,19 @@ static int				setup_shotgun(t_cub3d *t)
 
 	a = 64;
 	b = 64;
-	t->tex[5].img = mlx_xpm_file_to_image(t->mlx, "textures/gun.xpm", &a, &b);
+	t->tex[5].img = mlx_xpm_file_to_image(t->window.mlx, "textures/gun.xpm", &a, &b);
 	t->tex[5].data = mlx_get_data_addr(t->tex[5].img, &t->tex[5].bpp,
 			&t->tex[5].sizeline, &t->tex[5].endian);
-	t->tex[6].img = mlx_xpm_file_to_image(t->mlx, "textures/gun2.xpm", &a, &b);
+	t->tex[6].img = mlx_xpm_file_to_image(t->window.mlx, "textures/gun2.xpm", &a, &b);
 	t->tex[6].data = mlx_get_data_addr(t->tex[6].img, &t->tex[6].bpp,
 			&t->tex[6].sizeline, &t->tex[6].endian);
-	t->tex[7].img = mlx_xpm_file_to_image(t->mlx, "textures/gun3.xpm", &a, &b);
+	t->tex[7].img = mlx_xpm_file_to_image(t->window.mlx, "textures/gun3.xpm", &a, &b);
 	t->tex[7].data = mlx_get_data_addr(t->tex[7].img, &t->tex[7].bpp,
 			&t->tex[7].sizeline, &t->tex[7].endian);
-	t->tex[8].img = mlx_xpm_file_to_image(t->mlx, "textures/gun4.xpm", &a, &b);
+	t->tex[8].img = mlx_xpm_file_to_image(t->window.mlx, "textures/gun4.xpm", &a, &b);
 	t->tex[8].data = mlx_get_data_addr(t->tex[8].img, &t->tex[8].bpp,
 			&t->tex[8].sizeline, &t->tex[8].endian);
-	t->tex[9].img = mlx_xpm_file_to_image(t->mlx, "textures/gun5.xpm", &a, &b);
+	t->tex[9].img = mlx_xpm_file_to_image(t->window.mlx, "textures/gun5.xpm", &a, &b);
 	t->tex[9].data = mlx_get_data_addr(t->tex[9].img, &t->tex[9].bpp,
 			&t->tex[9].sizeline, &t->tex[9].endian);
 	return (1);
