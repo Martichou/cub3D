@@ -1,4 +1,4 @@
-# Product Name
+# CUB3D
 > Multiplayer cub3d (wolf clone)
 
 Cub3D is a project make for the school 19.
